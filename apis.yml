@@ -1,0 +1,53 @@
+name: Atmospore Pollen Forecasts
+description: >-
+  AI-driven global pollen and allergy forecasting service providing species-level forecasts (real-time plus up to
+  14-day) at ~28 km resolution, covering 25 species across trees, grasses, and weeds with multilingual metadata and
+  defined risk thresholds.
+url: https://atmospore-pollen-forecasts.apievangelist.com/apis.yml
+created: '2026-08-03'
+modified: '2026-08-03'
+specificationVersion: '0.21'
+tags:
+  - weather
+  - pollen
+  - allergy
+  - environmental-data
+  - health
+  - geospatial
+  - forecasting
+  - smart-home
+  - mcp
+  - openapi
+apis:
+  - name: Atmospore Pollen Forecast API
+    description: >-
+      REST API for species-level point and area pollen forecasts, top contributing species, and species metadata.
+      API-key auth via x-api-key header; /v1/species requires no auth. Responses in grains/m³ with risk levels.
+    humanURL: https://atmospore.com/api-docs
+    baseURL: https://pollenapi.com
+    tags:
+      - weather
+      - pollen
+      - allergy
+      - environmental-data
+      - health
+      - geospatial
+      - forecasting
+      - smart-home
+      - mcp
+      - openapi
+    properties:
+      - type: OpenAPI
+        url: https://pollenapi.com/openapi.json
+      - type: OpenAPI
+        url: https://pollenapi.com/v1/openapi?format=yaml
+      - type: Documentation
+        url: https://atmospore.com/api-docs
+maintainers:
+  - FN: Atmospore Pollen Forecasts
+    url: https://atmospore.com/
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 97
+  at: '2026-08-03T19:57:40.909Z'
