@@ -1,0 +1,59 @@
+generated: '2026-08-09'
+method: probed
+source: live GET probes of every apis.yml + OpenAPI servers[] host
+description: >-
+  No /.well-known/ discovery surface is served on any Atmospore host. Every canonical path
+  was probed and none returned a usable document. Recorded as an honest zero: no raw files
+  were saved and NO WellKnown/SecurityTxt/APICatalog pointer is wired into apis.yml, because
+  there is nothing there to point at.
+hosts:
+  - host: https://pollenapi.com
+    role: API host (OpenAPI servers[0], apis.yml baseURL)
+    behaviour: unknown paths return HTTP 404 with a JSON body
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /robots.txt, status: 404}
+  - host: https://atmospore.com
+    role: website + documentation host
+    behaviour: >-
+      S3/CloudFront origin. Paths with a file extension return HTTP 403 (S3 AccessDenied,
+      application/xml); extensionless paths fall through to a single-page-app catch-all that
+      answers HTTP 200 with the homepage HTML. Neither is a document.
+    documents:
+      - {path: /.well-known/security.txt, status: 403, note: S3 AccessDenied XML}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /llms.txt, status: 403, note: S3 AccessDenied XML}
+      - {path: /security.txt, status: 403, note: S3 AccessDenied XML}
+  - host: https://mcp.atmospore.com
+    role: hosted MCP server host
+    behaviour: >-
+      Express app behind CloudFront. Any path other than /mcp returns HTTP 500 with a short
+      HTML error body — an unhandled route, not a discovery surface.
+    documents:
+      - {path: /.well-known/oauth-authorization-server, status: 500}
+      - {path: /.well-known/oauth-protected-resource, status: 500}
+      - {path: /.well-known/agent-card.json, status: 500}
+      - {path: /.well-known/agent.json, status: 500}
+      - {path: /llms.txt, status: 500}
+findings:
+  - >-
+    The MCP server is API-key authenticated rather than OAuth, so the absence of
+    /.well-known/oauth-protected-resource (RFC 9728) is consistent with the auth model,
+    but it means MCP clients cannot discover the auth requirement programmatically —
+    they learn it only from the JSON-RPC -32001 error on the first call.
+  - >-
+    atmospore.com publishes no security.txt (RFC 9116) and no api-catalog (RFC 9727).

@@ -1,0 +1,68 @@
+generated: '2026-08-09'
+method: searched
+source: https://atmospore.com/plans
+currency: EUR
+billing_period: month
+self_service: true
+credit_card_required_for_free_tier: false
+free_trial: 14 days on Starter, Professional and Enterprise
+plans:
+  - name: Free
+    price: 0
+    requests_per_month: 3000
+    features:
+      - Species-level pollen data
+      - Global coverage
+      - No credit card required
+    cta: {label: Get started free, url: https://atmospore.com/register}
+  - name: Starter
+    price: 9
+    requests_per_month: 15000
+    features:
+      - Species-level pollen data
+      - Global coverage
+      - 14-day free trial
+  - name: Professional
+    price: 39
+    requests_per_month: 150000
+    most_popular: true
+    features:
+      - Species-level pollen data
+      - Global coverage
+      - 7-day forecast
+      - Priority support
+      - 14-day free trial
+  - name: Enterprise
+    price: 149
+    requests_per_month: 1500000
+    features:
+      - Species-level pollen data
+      - Global coverage
+      - 7-day forecast
+      - Dedicated support
+      - Custom SLA
+  - name: Custom
+    price: null
+    requests_per_month: null
+    contact: https://atmospore.com/contact
+    features:
+      - Negotiated API call limits
+      - Latest updates on new features
+      - Dedicated support
+      - Precision-tuned model access
+      - CSV export of single-location historic values
+commercial_terms:
+  payment_methods: [major credit cards, wire transfer (enterprise)]
+  upgrades: any time, prorated for the remainder of the billing cycle
+  refunds: 30-day money-back guarantee on all plans
+  support: email for all plans; priority and dedicated account management on higher tiers
+  terms_of_service: https://atmospore.com/terms-of-service
+  privacy_policy: https://atmospore.com/privacy-policy
+notes:
+  - >-
+    The "7-day forecast" bullet appears only from Professional up, but the contract's
+    forecast_days parameter accepts 1-14 on every tier and no tier gating is documented in
+    the OpenAPI. The commercial and technical ceilings do not agree.
+  - >-
+    "CSV export of single location historic values" is a Custom-tier capability with no
+    corresponding API operation in the published contract.

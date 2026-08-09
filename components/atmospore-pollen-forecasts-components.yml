@@ -1,0 +1,48 @@
+generated: '2026-08-09'
+method: searched
+source: https://atmospore.com/widgets
+description: >-
+  Atmospore publishes one embeddable client-side surface: a hosted iframe pollen widget. It is
+  distinct from the SDKs in packages/ — it requires no API key, consumes no quota, and is
+  configured entirely through the URL path and query string.
+families:
+  - family: Pollen widget
+    kind: hosted iframe
+    loader: none (plain <iframe>)
+    auth: none
+    quota_impact: none (served from CloudFront, does not count against any API quota)
+    base_url: https://atmospore.com/widget/{location}
+    default_size: {width: 300, height: 250}
+    embed_example: '<iframe src="https://atmospore.com/widget/london" width="300" height="250" frameborder="0"></iframe>'
+    x-evidence:
+      fetched: '2026-08-09'
+      url: https://atmospore.com/widget/london
+      http_status: 200
+      content_type: text/html
+    layouts:
+      - name: top species
+        description: Ranked list of today's strongest pollen species at the location, with species names and numerical grain counts.
+        audience: allergy-focused
+      - name: categories
+        description: Tree, grass and weed pollen with proportional bars and icons; shows which category dominates today.
+        audience: general
+    themes: [light, dark]
+    locales: [en, 'no', sv]
+    localised_path: https://atmospore.com/{locale}/widget/{location}
+    location_modes:
+      - {mode: curated city, count: 52, note: 'named slugs across UK, Norway, Denmark, Sweden, Netherlands, France, Germany and the United States'}
+      - {mode: coordinates, note: 'any populated point on Earth, ~28 km model resolution'}
+    customizer: https://atmospore.com/widgets
+    privacy:
+      third_party_tracking: false
+      note: >-
+        Documented as carrying no Google Tag Manager, no consent banner and no third-party
+        requests inside the iframe.
+    customization_limits: >-
+      v1 offers light/dark theme only; colours and fonts are not configurable. White-label
+      customization is available on request.
+    refresh: daily
+not_offered:
+  - No JavaScript component library or web components.
+  - No React/Vue/Svelte wrappers.
+  - No embedded dashboard or hosted account UI for end customers.

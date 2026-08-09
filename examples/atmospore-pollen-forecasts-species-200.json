@@ -1,0 +1,536 @@
+{
+  "meta": {
+    "total_species": 25,
+    "categories": [
+      "tree",
+      "grass",
+      "weed"
+    ],
+    "risk_levels": [
+      "low",
+      "moderate",
+      "high",
+      "very high"
+    ],
+    "units": "grains/m³"
+  },
+  "data": {
+    "birch": {
+      "display_name": "Birch",
+      "category": "tree",
+      "names": {
+        "en": "Birch",
+        "sv": "Björk",
+        "no": "Bjørk"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "betulaceae": {
+      "display_name": "Birch family",
+      "category": "tree",
+      "names": {
+        "en": "Birch family",
+        "sv": "Björkfamiljen",
+        "no": "Bjørkefamilien"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "hazel": {
+      "display_name": "Hazel",
+      "category": "tree",
+      "names": {
+        "en": "Hazel",
+        "sv": "Hassel",
+        "no": "Hassel"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "alder": {
+      "display_name": "Alder",
+      "category": "tree",
+      "names": {
+        "en": "Alder",
+        "sv": "Al",
+        "no": "Or"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "pine": {
+      "display_name": "Pine",
+      "category": "tree",
+      "names": {
+        "en": "Pine",
+        "sv": "Tall",
+        "no": "Furu"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "spruce": {
+      "display_name": "Spruce",
+      "category": "tree",
+      "names": {
+        "en": "Spruce",
+        "sv": "Gran",
+        "no": "Gran"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "pinaceae": {
+      "display_name": "Pine family",
+      "category": "tree",
+      "names": {
+        "en": "Pine family",
+        "sv": "Tallfamiljen",
+        "no": "Furufamilien"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "elm": {
+      "display_name": "Elm",
+      "category": "tree",
+      "names": {
+        "en": "Elm",
+        "sv": "Alm",
+        "no": "Alm"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "salix": {
+      "display_name": "Willow",
+      "category": "tree",
+      "names": {
+        "en": "Willow",
+        "sv": "Sälg",
+        "no": "Selje"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "oak": {
+      "display_name": "Oak",
+      "category": "tree",
+      "names": {
+        "en": "Oak",
+        "sv": "Ek",
+        "no": "Eik"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "maple": {
+      "display_name": "Maple",
+      "category": "tree",
+      "names": {
+        "en": "Maple",
+        "sv": "Lönn",
+        "no": "Lønn"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "hickory": {
+      "display_name": "Hickory",
+      "category": "tree",
+      "names": {
+        "en": "Hickory",
+        "sv": "Hickory",
+        "no": "Hickory"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "populus": {
+      "display_name": "Poplar",
+      "category": "tree",
+      "names": {
+        "en": "Poplar",
+        "sv": "Poppel",
+        "no": "Poppel"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "cypress": {
+      "display_name": "Cypress",
+      "category": "tree",
+      "names": {
+        "en": "Cypress",
+        "sv": "Cypress",
+        "no": "Sypress"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "platanus": {
+      "display_name": "Plane tree",
+      "category": "tree",
+      "names": {
+        "en": "Plane tree",
+        "sv": "Platan",
+        "no": "Platan"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "fraxinus": {
+      "display_name": "Ash",
+      "category": "tree",
+      "names": {
+        "en": "Ash",
+        "sv": "Ask",
+        "no": "Ask"
+      },
+      "risk_thresholds": [
+        15,
+        90,
+        500,
+        1500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "timothy": {
+      "display_name": "Timothy Grass",
+      "category": "grass",
+      "names": {
+        "en": "Timothy Grass",
+        "sv": "Timotej",
+        "no": "Timotei"
+      },
+      "risk_thresholds": [
+        5,
+        20,
+        100,
+        200
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "bermuda": {
+      "display_name": "Bermuda Grass",
+      "category": "grass",
+      "names": {
+        "en": "Bermuda Grass",
+        "sv": "Bermudagräs",
+        "no": "Bermudagress"
+      },
+      "risk_thresholds": [
+        5,
+        20,
+        100,
+        200
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "lolium": {
+      "display_name": "Ryegrass",
+      "category": "grass",
+      "names": {
+        "en": "Ryegrass"
+      },
+      "risk_thresholds": [
+        5,
+        20,
+        100,
+        200
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "dactylis": {
+      "display_name": "Cock's-foot",
+      "category": "grass",
+      "names": {
+        "en": "Cock's-foot"
+      },
+      "risk_thresholds": [
+        5,
+        20,
+        100,
+        200
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "arrhenatherum": {
+      "display_name": "False Oat-grass",
+      "category": "grass",
+      "names": {
+        "en": "False Oat-grass"
+      },
+      "risk_thresholds": [
+        5,
+        20,
+        100,
+        200
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "poa": {
+      "display_name": "Bluegrass",
+      "category": "grass",
+      "names": {
+        "en": "Bluegrass"
+      },
+      "risk_thresholds": [
+        5,
+        20,
+        100,
+        200
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "urtica": {
+      "display_name": "Nettle",
+      "category": "weed",
+      "names": {
+        "en": "Nettle",
+        "sv": "Brännässla",
+        "no": "Brennesle"
+      },
+      "risk_thresholds": [
+        10,
+        50,
+        200,
+        500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "artemisia": {
+      "display_name": "Mugwort",
+      "category": "weed",
+      "names": {
+        "en": "Mugwort",
+        "sv": "Gråbo",
+        "no": "Burot"
+      },
+      "risk_thresholds": [
+        10,
+        50,
+        200,
+        500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    },
+    "ambrosia": {
+      "display_name": "Ragweed",
+      "category": "weed",
+      "names": {
+        "en": "Ragweed",
+        "sv": "Ambrosia",
+        "no": "Ambrosia"
+      },
+      "risk_thresholds": [
+        10,
+        50,
+        200,
+        500
+      ],
+      "risk_labels": [
+        "low",
+        "moderate",
+        "high",
+        "very high"
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Atmospore Pollen Forecast API
+  version: 1.0.0
+extends: openapi/atmospore-pollen-forecasts-openapi-original.json
+x-provenance:
+  generated: '2026-08-09'
+  method: generated
+  source: openapi/atmospore-pollen-forecasts-openapi-original.json
+  note: >-
+    Captures API Evangelist enhancements over the provider's published contract. The original is
+    never mutated. Every addition below is grounded in something the provider publishes on
+    atmospore.com, in the first-party SDK/MCP repositories, or in a live probe on 2026-08-09.
+actions:
+  - target: $.info
+    description: Record provenance, the missing licence, and the documentation entry point.
+    update:
+      x-apievangelist-enriched: '2026-08-09'
+      x-apievangelist-slug: atmospore-pollen-forecasts
+      x-logo:
+        url: https://atmospore.com/images/logo-bg.png
+      x-documentation: https://atmospore.com/api-docs
+      x-pricing: https://atmospore.com/plans
+
+  - target: $.info
+    description: The published document declares no licence for the API contract itself.
+    update:
+      x-license-note: >-
+        No `info.license` is declared. The first-party client libraries are MIT; the API terms are
+        at https://atmospore.com/terms-of-service.
+
+  - target: $.servers
+    description: Record the sibling non-REST surfaces so a reader of the spec finds them.
+    update:
+      x-additional-surfaces:
+        - {kind: mcp, url: 'https://mcp.atmospore.com/mcp', transport: http, auth: 'Authorization: Bearer <key>'}
+        - {kind: widget, url: 'https://atmospore.com/widget/{location}', auth: none}
+
+  - target: $.paths['/v1/pollen'].get
+    description: Add the missing tag, an MCP binding, and the rate-limit contract.
+    update:
+      tags: [Forecast]
+      x-mcp-tool: get_pollen
+      x-agentic-access: {action-class: connected, consequence: read}
+      x-rate-limit: {scope: api-key, plans: 'Free 3000/mo, Starter 15000/mo, Professional 150000/mo, Enterprise 1500000/mo', headers: none}
+      x-cache-control: 'public, max-age=3600, s-maxage=3600'
+
+  - target: $.paths['/v1/pollen-area'].get
+    description: Tag, MCP binding, and the unit trap between the tool and the operation.
+    update:
+      tags: [Forecast]
+      x-mcp-tool: get_area_average
+      x-agentic-access: {action-class: connected, consequence: read}
+      x-unit-warning: >-
+        `radius` here is METRES (default 25000, max 50000). The MCP tool `get_area_average` takes
+        `radius_km` (default 25). Convert before binding one to the other.
+
+  - target: $.paths['/v1/pollen-top'].get
+    description: Tag, MCP binding, and the tool parameter with no REST equivalent.
+    update:
+      tags: [Forecast]
+      x-mcp-tool: get_top_species
+      x-agentic-access: {action-class: connected, consequence: read}
+      x-note: >-
+        The MCP tool exposes a `limit` argument that has no counterpart here; truncation happens in
+        the MCP wrapper, not the API.
+
+  - target: $.paths['/v1/species'].get
+    description: Tag the only unauthenticated operation and state its cache contract.
+    update:
+      tags: [Metadata]
+      x-mcp-tool: list_supported_species
+      x-agentic-access: {action-class: connected, consequence: read, subject: none}
+      x-unauthenticated: true
+      x-cache-control: max-age=86400
+      x-integration-note: >-
+        Call this first. It resolves the 25 species slugs, categories, localised names and
+        risk_thresholds that every other operation's `species` parameter and response keys use.
+
+  - target: $
+    description: Declare the tags the operations were missing entirely.
+    update:
+      tags:
+        - {name: Forecast, description: 'Point, area and ranked species pollen forecasts.'}
+        - {name: Metadata, description: 'Species catalogue, categories and risk thresholds.'}
+
+  - target: $.components.parameters.forecast_days
+    description: Flag the disagreement between the contract ceiling and the commercial ceiling.
+    update:
+      x-note: >-
+        The contract accepts 1-14. https://atmospore.com/plans advertises a "7-day forecast" from
+        the Professional tier up, and no tier gating is described in the contract.
+
+  - target: $.components.schemas.Error
+    description: State the error contract explicitly — it is not RFC 9457.
+    update:
+      x-error-format: proprietary
+      x-rfc9457: false
+      x-statuses:
+        400: Invalid parameters
+        401: 'Missing API key. Include x-api-key header.'
+        403: Invalid API key
+        429: Daily quota exceeded
+      x-correlation-header: apigw-requestid
+
+  - target: $.components.securitySchemes.ApiKeyAuth
+    description: Record where a key comes from and the observed prefix.
+    update:
+      x-key-source: https://atmospore.com/account
+      x-key-prefix: 'ak_ (the MCP setup article at /article/mcp shows atmo_ instead — the two disagree)'
+      x-free-tier: 3000 requests/month, no credit card

@@ -1,0 +1,30 @@
+generated: '2026-08-09'
+method: generated
+source: openapi/atmospore-pollen-forecasts-openapi-original.json + https://atmospore.com/api-docs
+description: >-
+  Packaged agent operating instructions for the Atmospore Pollen Forecast API. Every step is
+  grounded in an operationId that exists verbatim in the published OpenAPI. Atmospore publishes
+  no AGENTS.md or skill files of its own; these are API Evangelist generations.
+skills:
+  - file: atmospore-pollen-forecasts-point-forecast.md
+    name: Get a species-level pollen forecast for a place
+    api: openapi/atmospore-pollen-forecasts-openapi-original.json
+    operations: [getSpecies, getPollenForecast]
+    mcp_equivalents: [list_supported_species, get_pollen]
+  - file: atmospore-pollen-forecasts-worst-allergens.md
+    name: Rank the worst allergens for a place and week
+    api: openapi/atmospore-pollen-forecasts-openapi-original.json
+    operations: [getSpecies, getPollenTop]
+    mcp_equivalents: [list_supported_species, get_top_species]
+  - file: atmospore-pollen-forecasts-area-risk.md
+    name: Assess area-wide pollen risk and trend
+    api: openapi/atmospore-pollen-forecasts-openapi-original.json
+    operations: [getSpecies, getPollenArea]
+    mcp_equivalents: [list_supported_species, get_area_average]
+shared_rules:
+  - Resolve species slugs from getSpecies (unauthenticated, cache 24h) before using the species filter.
+  - Send x-api-key on every operation except getSpecies.
+  - Values are grains/m3; risk levels are low | moderate | high | very high.
+  - 'Errors are {"error": "<message>"}, not RFC 9457. 403 means a bad key — never retry it.'
+  - No rate-limit response headers exist; cache instead of pacing.
+  - All operations are GET, so there is no idempotency key and retries are safe.

@@ -1,0 +1,70 @@
+generated: '2026-08-09'
+method: searched
+source: openapi/atmospore-pollen-forecasts-openapi-original.json
+docs: https://atmospore.com/api-docs
+description: >-
+  API-key authentication only. One key, one environment, no OAuth, no OIDC, no scopes and no
+  test/live separation. The same key authenticates REST and the hosted MCP server, though the two
+  carry it differently.
+summary:
+  types: [apiKey]
+  api_key_in: [header, query]
+  oauth2_flows: []
+  scopes: false
+  mtls: false
+  environments: 1
+schemes:
+  - name: ApiKeyAuth
+    type: apiKey
+    in: header
+    parameter: x-api-key
+    description: API key from your Atmospore account settings
+    surface: rest
+    applies_to: [getPollenForecast, getPollenArea, getPollenTop]
+    sources:
+      - openapi/atmospore-pollen-forecasts-openapi-original.json
+  - name: MCPBearer
+    type: apiKey
+    in: header
+    parameter: Authorization
+    format: 'Bearer ak_...'
+    surface: mcp
+    endpoint: https://mcp.atmospore.com/mcp
+    alternative: {in: query, parameter: key}
+    sources:
+      - https://mcp.atmospore.com/mcp (live JSON-RPC -32001 error, 2026-08-09)
+      - https://atmospore.com/article/mcp
+unauthenticated_operations:
+  - operationId: getSpecies
+    path: /v1/species
+    declared: 'security: [] in the OpenAPI'
+    verified: '2026-08-09, HTTP 200 with no credentials'
+    note: Species metadata is fully public and cacheable for 24 hours.
+key_management:
+  issuance: https://atmospore.com/account
+  signup: https://atmospore.com/register
+  free_tier: 3000 requests/month, no credit card
+  observed_prefix: ak_
+  documented_prefix: atmo_
+  prefix_discrepancy: >-
+    The MCP server's own error message says `Bearer ak_...`, while the setup snippet published at
+    https://atmospore.com/article/mcp says `Bearer atmo_your_key_here`. One of the two is wrong.
+  rotation_policy: not published
+  key_scoping: none (a key is all-or-nothing across every operation)
+  expiry: not published
+failure_modes:
+  - {status: 401, condition: no x-api-key header, body: '{"error":"Missing API key. Include x-api-key header."}', verified: true}
+  - {status: 403, condition: unknown or malformed key, body: '{"error":"Invalid API key"}', verified: true, retry: never}
+transport_security:
+  https_required: true
+  tls_version: TLSv1.3
+  hsts: false
+  note: >-
+    No Strict-Transport-Security header on pollenapi.com or atmospore.com — a plaintext first
+    request is not protected against downgrade. See security/atmospore-pollen-forecasts-domain-security.yml.
+gaps:
+  - Key travels in a header on REST and in an Authorization bearer on MCP with no unified statement anywhere.
+  - No scopes, so an integration cannot be granted read-only or single-operation access — every key is total.
+  - No key rotation, expiry or revocation policy published.
+  - No HSTS on the API host.
+  - Documented and actual key prefixes disagree.

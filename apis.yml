@@ -1,11 +1,19 @@
 name: Atmospore Pollen Forecasts
 description: >-
-  AI-driven global pollen and allergy forecasting service providing species-level forecasts (real-time plus up to
-  14-day) at ~28 km resolution, covering 25 species across trees, grasses, and weeds with multilingual metadata and
-  defined risk thresholds.
+  Atmospore is an Oslo-based provider of AI-driven global pollen and allergy forecasting. Its model
+  combines GFS weather data with ground-truth observations from professional aerobiology networks
+  to produce species-level forecasts on a ~28 km global grid, covering 25 individual tree, grass
+  and weed species with multilingual metadata (English, Norwegian, Swedish) and published
+  concentration thresholds for low/moderate/high/very-high risk. The surface is delivered three
+  ways: a four-operation REST API at pollenapi.com with a live OpenAPI 3.0.3 contract, a hosted
+  Model Context Protocol server at mcp.atmospore.com exposing the same capability as four agent
+  tools, and a keyless embeddable iframe widget that consumes no API quota. Point forecasts, area
+  averages with min/max across a radius, and severity-ranked top species are all available up to
+  14 days ahead; species metadata is served unauthenticated.
+image: https://atmospore.com/images/logo-bg.png
 url: https://atmospore-pollen-forecasts.apievangelist.com/apis.yml
 created: '2026-08-03'
-modified: '2026-08-03'
+modified: '2026-08-09'
 specificationVersion: '0.21'
 tags:
   - weather
@@ -18,11 +26,14 @@ tags:
   - smart-home
   - mcp
   - openapi
+  - norway
+  - climate
 apis:
   - name: Atmospore Pollen Forecast API
     description: >-
-      REST API for species-level point and area pollen forecasts, top contributing species, and species metadata.
-      API-key auth via x-api-key header; /v1/species requires no auth. Responses in grains/m³ with risk levels.
+      REST API for species-level point and area pollen forecasts, top contributing species, and
+      species metadata. API-key auth via x-api-key header; /v1/species requires no auth. Responses
+      in grains/m³ with risk levels.
     humanURL: https://atmospore.com/api-docs
     baseURL: https://pollenapi.com
     tags:
@@ -38,16 +49,178 @@ apis:
       - openapi
     properties:
       - type: OpenAPI
-        url: https://pollenapi.com/openapi.json
+        url: openapi/atmospore-pollen-forecasts-openapi-original.json
       - type: OpenAPI
-        url: https://pollenapi.com/v1/openapi?format=yaml
+        url: https://pollenapi.com/openapi.json
       - type: Documentation
         url: https://atmospore.com/api-docs
+      - type: APIReference
+        url: https://atmospore.com/api-docs
+      - type: DeveloperPortal
+        url: https://atmospore.com/api-docs
+  - name: Atmospore MCP Server
+    description: >-
+      Hosted Model Context Protocol server exposing the Atmospore pollen forecast capability as
+      four agent tools (get_pollen, get_top_species, get_area_average, list_supported_species)
+      plus an atmospore://help resource. JSON-RPC 2.0 over HTTP, authenticated with the same
+      Atmospore API key as the REST API. An MIT-licensed local stdio equivalent is published at
+      github.com/atmospore/atmospore-mcp.
+    humanURL: https://atmospore.com/article/mcp
+    baseURL: https://mcp.atmospore.com/mcp
+    tags:
+      - mcp
+      - agents
+      - pollen
+      - allergy
+      - forecasting
+    properties:
+      - type: ToolCrosswalk
+        url: mcp/atmospore-pollen-forecasts-tool-crosswalk.yml
+      - type: SourceCode
+        url: https://github.com/atmospore/atmospore-mcp
+      - type: Documentation
+        url: https://atmospore.com/article/mcp
 maintainers:
   - FN: Atmospore Pollen Forecasts
     url: https://atmospore.com/
+    email: support@atmospore.com
+common:
+  - type: Website
+    url: https://atmospore.com/
+  - type: DeveloperPortal
+    url: https://atmospore.com/api-docs
+  - type: Documentation
+    url: https://atmospore.com/api-docs
+  - type: APIReference
+    url: https://atmospore.com/api-docs
+  - type: Support
+    url: https://atmospore.com/contact
+  - type: GitHubOrganization
+    url: https://github.com/atmospore
+  - type: Pricing
+    url: https://atmospore.com/plans
+  - type: Signup
+    url: https://atmospore.com/register
+  - type: Login
+    url: https://atmospore.com/login
+  - type: TermsOfService
+    url: https://atmospore.com/terms-of-service
+  - type: PrivacyPolicy
+    url: https://atmospore.com/privacy-policy
+  - type: Authentication
+    url: authentication/atmospore-pollen-forecasts-authentication.yml
+  - type: Conventions
+    url: conventions/atmospore-pollen-forecasts-conventions.yml
+  - type: ErrorCatalog
+    url: errors/atmospore-pollen-forecasts-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/atmospore-pollen-forecasts-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/atmospore-pollen-forecasts-rate-limits.yml
+  - type: Plans
+    url: plans/atmospore-pollen-forecasts-plans.yml
+  - type: Packages
+    url: packages/atmospore-pollen-forecasts-packages.yml
+  - type: SDKs
+    url: packages/atmospore-pollen-forecasts-packages.yml
+  - type: Sandbox
+    url: sandbox/atmospore-pollen-forecasts-sandbox.yml
+  - type: Components
+    url: components/atmospore-pollen-forecasts-components.yml
+  - type: Conformance
+    url: conformance/atmospore-pollen-forecasts-conformance.yml
+  - type: DomainSecurity
+    url: security/atmospore-pollen-forecasts-domain-security.yml
+  - type: MCPServer
+    url: mcp/atmospore-pollen-forecasts-mcp.yml
+  - type: Overlay
+    url: overlays/atmospore-pollen-forecasts-openapi-overlay.yaml
+  - type: Examples
+    url: examples/_index.yml
+  - type: DataModel
+    url: data-model/atmospore-pollen-forecasts-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/atmospore-pollen-forecasts-agentic-access.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/atmospore-pollen-forecasts-llms.txt
+  - type: Arazzo
+    name: Plan an allergy week for a location
+    url: arazzo/atmospore-pollen-forecasts-allergy-week-plan.yml
+  - type: Arazzo
+    name: Build a regional pollen risk board
+    url: arazzo/atmospore-pollen-forecasts-regional-risk-board.yml
 generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 97
   at: '2026-08-03T19:57:40.909Z'
+x-enrichment:
+  date: '2026-08-09'
+  status: enriched
+  artifacts_added: 30
+  pass: local-v1
+x-enrichment-notes:
+  coverage: covered
+  key_corrections:
+    - >-
+      PROFILE.md recorded the MCP server as local-stdio-only and "NOT a hosted/remote HTTP or SSE
+      endpoint". A hosted remote MCP server is live at https://mcp.atmospore.com/mcp — verified
+      2026-08-09 with a tools/list POST that returned a well-formed JSON-RPC -32001 auth error.
+      It is documented at https://atmospore.com/article/mcp.
+    - >-
+      PROFILE.md recorded "agent-native: no". Atmospore ships a hosted MCP server and markets
+      "Ask Claude about pollen"; the correct reading is agent-native yes, llms.txt no.
+    - >-
+      The published YAML rendering of the OpenAPI at https://pollenapi.com/v1/openapi?format=yaml
+      does not parse — `security:[]` and `ApiKeyAuth:[]` are emitted without the space YAML
+      requires after a mapping colon. Only the JSON at /openapi.json is machine-readable, so the
+      YAML pointer was replaced with the harvested JSON.
+  no_pointer_written:
+    - type: WellKnown
+      reason: No /.well-known/ document is served on any host — see well-known/atmospore-pollen-forecasts-well-known.yml.
+    - type: SecurityTxt
+      reason: /.well-known/security.txt returns 403 on atmospore.com and 404 on pollenapi.com.
+    - type: AgentCard
+      reason: >-
+        /.well-known/agent-card.json and /.well-known/agent.json miss on all three hosts. Never
+        derived — see the pipeline's search-only rule.
+    - type: Security
+      reason: >-
+        probe-security-programs.py reported a hit at https://atmospore.com/responsible-disclosure,
+        but that URL is the single-page-app catch-all returning the homepage with the slug echoed in
+        a breadcrumb. No vulnerability disclosure program exists; the false-positive artifact was
+        deleted.
+    - type: Compliance
+      reason: No certification or compliance program is published anywhere on the site.
+    - type: TrustCenter
+      reason: trust.atmospore.com is NXDOMAIN; /trust, /security and /compliance all soft-404.
+    - type: StatusPage
+      reason: No status page. status.atmospore.com is NXDOMAIN and /status soft-404s.
+    - type: Deprecation
+      reason: No deprecation policy or Sunset header support published.
+    - type: ChangeLog
+      reason: /changelog soft-404s; only four undated-in-page articles approximate a release log.
+    - type: Idempotency
+      reason: >-
+        All four operations are GET, so requests are naturally idempotent, but there is no
+        idempotency-key contract because there are no writes to protect.
+    - type: AsyncAPI / Webhooks
+      reason: No event, streaming or webhook surface exists. Not applicable rather than missing.
+    - type: OAuthScopes
+      reason: API-key auth only; no OAuth anywhere, including on the MCP server.
+    - type: CLI
+      reason: No first-party CLI. The atmospore-mcp console script is a server entrypoint, not a CLI.
+    - type: Postman
+      reason: No public Postman collection or workspace found.
+    - type: Blog
+      reason: >-
+        Four articles exist under /article/, but there is no blog index page — /blog soft-404s and
+        only one article is linked from the site navigation.
+    - type: Roadmap
+      reason: /roadmap soft-404s; no roadmap is published.
+  soft_404_warning: >-
+    atmospore.com serves a single-page-app catch-all that answers HTTP 200 with ~35 KB of homepage
+    HTML for every unrouted extensionless path, and returns S3 AccessDenied XML (403) for paths with
+    a file extension. A 200 from this host is NOT evidence a page exists — compare the body.

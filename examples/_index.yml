@@ -1,0 +1,40 @@
+generated: '2026-08-09'
+method: searched
+source: live calls to https://pollenapi.com plus the published examples on https://atmospore.com/api-docs
+description: >-
+  The published OpenAPI declares response schemas but carries no `example`/`examples` members,
+  so no example survives machine-reading of the contract. These are real responses captured
+  from the live API on 2026-08-09, plus the example payloads printed in the HTML docs. They
+  exist so an agent reading the spec has a concrete payload shape to bind to.
+examples:
+  - file: atmospore-pollen-forecasts-species-200.json
+    operationId: getSpecies
+    request: GET https://pollenapi.com/v1/species
+    status: 200
+    method: captured-live
+    note: >-
+      Unauthenticated. 25 species keyed by slug, each with display_name, category, localised
+      names (en/sv/no), risk_thresholds and risk_labels. Served with Cache-Control max-age=86400.
+  - file: atmospore-pollen-forecasts-pollen-401.json
+    operationId: getPollenForecast
+    request: GET https://pollenapi.com/v1/pollen?lon=10.75&lat=59.91&dt=2026-08-09&forecast_days=1
+    status: 401
+    method: captured-live
+    note: No x-api-key header sent.
+  - file: atmospore-pollen-forecasts-pollen-403.json
+    operationId: getPollenForecast
+    request: GET https://pollenapi.com/v1/pollen?... with x-api-key set to an invalid value
+    status: 403
+    method: captured-live
+    note: Distinguishes a malformed/unknown key (403) from a missing one (401).
+docs_examples:
+  source: https://atmospore.com/api-docs
+  note: >-
+    The documentation page prints a worked example request and response for each of the three
+    authenticated operations. They are reproduced there verbatim and were not re-hosted here
+    because they are illustrative rather than captured.
+  operations: [getPollenForecast, getPollenArea, getPollenTop, getSpecies]
+gaps:
+  - >-
+    No `example`/`examples` in the OpenAPI itself — the richest examples live only in the HTML
+    docs page, where no machine reads them.

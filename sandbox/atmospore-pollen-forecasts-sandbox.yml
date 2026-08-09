@@ -1,0 +1,69 @@
+generated: '2026-08-09'
+method: searched
+source: https://atmospore.com/api-docs
+description: >-
+  Atmospore has no separate sandbox environment and no test/live key separation. What it does
+  publish is an interactive request builder embedded in the documentation, plus one genuinely
+  unauthenticated operation that any client can call to validate connectivity and resolve
+  species slugs before spending quota.
+separation:
+  test_mode: false
+  live_test_key_prefixes: null
+  sandbox_host: null
+  note: >-
+    There is one environment (https://pollenapi.com) and one class of key. Keys observed to use
+    the `ak_` prefix per the MCP server error message; the MCP setup article shows `atmo_`.
+console:
+  name: API Tester
+  url: https://atmospore.com/api-docs
+  kind: in-docs interactive request builder
+  capabilities:
+    - Endpoint selector across all four operations
+    - Query-parameter builder (lon, lat, dt, forecast_days)
+    - Clickable species picker covering all 25 species plus tree/grass/weed groups
+    - Header builder (x-api-key, accept)
+    - Live "Call the API" execution with copyable request URL
+  key_required: >-
+    The docs label the x-api-key field "Leave empty to try with demo mode". A live
+    unauthenticated call to GET /v1/pollen from outside the docs page returned HTTP 401
+    ("Missing API key. Include x-api-key header."), so any demo path is scoped to the docs
+    page itself and is not a public anonymous mode.
+  x-evidence:
+    fetched: '2026-08-09'
+    url: 'https://pollenapi.com/v1/pollen?lon=10.75&lat=59.91&dt=2026-08-09&forecast_days=1'
+    http_status: 401
+open_operation:
+  operationId: getSpecies
+  url: https://pollenapi.com/v1/species
+  auth: none
+  verified: '2026-08-09, HTTP 200, 25 species'
+  use_as: >-
+    The free integration smoke test. Call it to confirm connectivity, discover valid species
+    slugs, and read the risk_thresholds before binding a UI — no key, no quota.
+  cached: 'Cache-Control: max-age=86400'
+  captured_response: examples/atmospore-pollen-forecasts-species-200.json
+free_tier_as_sandbox:
+  plan: Free
+  allowance: 3000 requests/month (~100/day)
+  credit_card_required: false
+  signup: https://atmospore.com/register
+  note: The free plan is the de facto development environment.
+test_values:
+  note: >-
+    Atmospore publishes no magic/fixture identifiers — inputs are real coordinates and real
+    dates against the live model. Coordinates published in first-party material as worked
+    examples are listed below verbatim; nothing here is invented.
+  coordinates:
+    - {label: 'Oslo, Norway', lat: 59.91, lon: 10.75, source: 'github.com/atmospore/atmospore-mcp help resource'}
+    - {label: 'Bergen, Norway', lat: 60.39, lon: 5.32, source: 'github.com/atmospore/atmospore-mcp help resource'}
+    - {label: 'London, UK', lat: 51.51, lon: -0.13, source: 'https://atmospore.com/api-docs curl examples'}
+    - {label: 'New York, USA', lat: 40.71, lon: -74.01, source: 'github.com/atmospore/atmospore-mcp help resource'}
+  widget_location: london
+error_simulation:
+  - {scenario: missing key, how: omit x-api-key, result: 'HTTP 401 {"error":"Missing API key. Include x-api-key header."}', verified: true}
+  - {scenario: invalid key, how: send a bogus x-api-key, result: 'HTTP 403 {"error":"Invalid API key"}', verified: true}
+  - {scenario: quota exceeded, how: exhaust the daily allowance, result: HTTP 429, verified: false}
+gaps:
+  - No test/live key separation, so integration testing burns production quota.
+  - No fixture or trigger tooling; no way to force a 429 or a high-pollen day deterministically.
+  - The docs advertise a "demo mode" that is not reachable from outside the docs page.

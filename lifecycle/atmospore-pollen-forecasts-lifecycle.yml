@@ -1,0 +1,67 @@
+generated: '2026-08-09'
+method: probed
+source: https://atmospore.com/api-docs + https://atmospore.com/sitemap.xml + live probes
+description: >-
+  Versioning is visible in the contract; nothing else about the API's lifecycle is published.
+  Atmospore has no status page, no deprecation policy, no SLA document and no changelog.
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_version: 1.0.0
+  source: openapi/atmospore-pollen-forecasts-openapi-original.json
+  policy_published: false
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  rfc8594: false
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    "Custom SLA" is listed as an Enterprise (EUR 149/mo) plan feature and "Priority support"
+    from Professional up, but no SLA document or uptime target is published for any tier.
+  source: https://atmospore.com/plans
+status_page:
+  url: null
+  probed:
+    - {url: 'https://atmospore.com/status', status: 200, verdict: soft-404, note: 'single-page-app catch-all returns the homepage HTML (~35 KB) for every unrouted path'}
+    - {host: status.atmospore.com, dns: NXDOMAIN}
+support:
+  channel: https://atmospore.com/contact
+  email: support@atmospore.com
+  contact_email: founder@atmospore.com
+  hours: Mon-Fri 09:00-18:00
+  address: Turbinveien 12, 0195 Oslo, Norway
+changelog:
+  url: null
+  probed:
+    - {url: 'https://atmospore.com/changelog', status: 200, verdict: soft-404}
+  nearest_equivalent:
+    note: >-
+      Four dated articles under /article/ act as an informal release log, but there is no index
+      page, no version tagging and no API-change discipline.
+    entries:
+      - {url: 'https://atmospore.com/article/mcp', date: '2026-05-03', title: 'Ask Claude about pollen', change: 'MCP server launched'}
+      - {url: 'https://atmospore.com/article/locations-update', date: null, title: 'Locations update'}
+      - {url: 'https://atmospore.com/article/pollen-modelling', date: null, title: 'Pollen modelling'}
+      - {url: 'https://atmospore.com/article/pollen-science', date: null, title: 'Pollen science'}
+roadmap:
+  url: null
+  probed:
+    - {url: 'https://atmospore.com/roadmap', status: 200, verdict: soft-404}
+maturity:
+  api: production (v1, paid plans live)
+  sdks: '0.1.0, "Development Status :: 3 - Alpha" on both packages'
+  mcp_server: 0.1.0, alpha
+gaps:
+  - >-
+    No status page and no changelog. A consumer has no way to learn that a forecast model
+    changed, a species was added, or the service degraded.
+  - >-
+    No deprecation policy and no Sunset/Deprecation header support, so v1 could move without
+    a documented notice period.
+  - >-
+    The soft-404 catch-all means every probe for /status, /changelog and /roadmap returns
+    HTTP 200. Presence cannot be inferred from a status code on this host.

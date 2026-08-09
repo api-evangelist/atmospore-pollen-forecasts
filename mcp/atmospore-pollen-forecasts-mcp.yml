@@ -1,0 +1,114 @@
+generated: '2026-08-09'
+method: searched
+status: published
+source: https://atmospore.com/article/mcp
+description: >-
+  Atmospore ships BOTH a hosted remote MCP server and an open-source local stdio server.
+  The remote endpoint at https://mcp.atmospore.com/mcp is live and answers JSON-RPC, gated
+  by the same Atmospore API key used for REST. The local server is MIT-licensed Python
+  published from the atmospore GitHub organization.
+server:
+  name: atmospore
+  transport: http
+  url: https://mcp.atmospore.com/mcp
+  protocol: JSON-RPC 2.0 (Streamable HTTP)
+  authentication:
+    type: apiKey
+    schemes:
+      - {style: header, header: Authorization, format: 'Bearer ak_...'}
+      - {style: query, parameter: key, format: 'ak_...'}
+    anonymous_access: false
+    oauth: false
+    note: >-
+      The server error message documents the `ak_` key prefix. The setup snippet published at
+      https://atmospore.com/article/mcp shows `Bearer atmo_your_key_here` instead — the docs
+      and the server disagree on the key prefix. Keys come from https://atmospore.com/account.
+  client_setup:
+    documented_via: 'npx -y mcp-remote https://mcp.atmospore.com/mcp --header "Authorization: Bearer <key>"'
+    clients_named: [Claude Desktop, Cursor, Continue, ChatGPT Desktop]
+  x-evidence:
+    fetched: '2026-08-09'
+    url: https://mcp.atmospore.com/mcp
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    http_status: 401
+    response: >-
+      {"jsonrpc":"2.0","error":{"code":-32001,"message":"Missing API key. Send
+      `Authorization: Bearer ak_...` or `?key=ak_...`. Get a free key at
+      https://atmospore.com/account."},"id":null}
+    interpretation: >-
+      A well-formed JSON-RPC error, not an HTML shell — the endpoint is a real live MCP
+      server. tools/list and initialize are both auth-gated, so live inputSchema
+      introspection requires an authenticated key.
+local_server:
+  name: atmospore-mcp
+  transport: stdio
+  repository: https://github.com/atmospore/atmospore-mcp
+  license: MIT
+  language: python
+  framework: mcp.server.fastmcp (FastMCP)
+  entrypoint: atmospore-mcp
+  env: [ATMOSPORE_API_KEY]
+  container: Dockerfile present in repo
+  directory_listing: glama.json present (listed on the third-party Glama MCP directory)
+  published_to_pypi: false
+tools_source: >-
+  Tool names, parameters, defaults and descriptions below are read verbatim from the
+  first-party open-source server at
+  https://raw.githubusercontent.com/atmospore/atmospore-mcp/main/atmospore_mcp/server.py
+  and its README. The hosted server's live tools/list is auth-gated and was NOT introspected,
+  so the hosted tool set is asserted to match the open-source server but is unverified.
+tools:
+  - name: get_pollen
+    description: >-
+      Get the daily pollen forecast for a specific point on Earth. Returns a list of daily
+      forecasts; each day includes date, overall_risk (Low|Moderate|High|Very High) and
+      per-species values in grains/m3 with individual risk levels.
+    parameters:
+      - {name: lat, type: number, required: true}
+      - {name: lon, type: number, required: true}
+      - {name: forecast_days, type: integer, required: false, default: 1}
+    source_operation: openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenForecast
+  - name: get_top_species
+    description: >-
+      Get the top contributing pollen species at a point, ranked highest first. Each entry
+      has species slug, display_name, max_value in grains/m3, risk_level and category.
+    parameters:
+      - {name: lat, type: number, required: true}
+      - {name: lon, type: number, required: true}
+      - {name: limit, type: integer, required: false, default: 5}
+    source_operation: openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenTop
+  - name: get_area_average
+    description: >-
+      Get tree, grass and weed pollen aggregates over a radius around a point. One entry per
+      day with overall_risk and per-category aggregates (tree_tot, grass_tot, weed_tot).
+    parameters:
+      - {name: lat, type: number, required: true}
+      - {name: lon, type: number, required: true}
+      - {name: radius_km, type: number, required: false, default: 25}
+      - {name: forecast_days, type: integer, required: false, default: 7}
+    source_operation: openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenArea
+  - name: list_supported_species
+    description: >-
+      List all pollen species the model tracks with slug, display name, category
+      (tree/grass/weed), localised names (en, no, sv) and risk-level concentration thresholds.
+    parameters: []
+    source_operation: openapi/atmospore-pollen-forecasts-openapi-original.json#getSpecies
+resources:
+  - uri: atmospore://help
+    description: Usage notes browsable from Claude Desktop (tool table, coordinate examples, quota notes).
+error_contract:
+  envelope: '{ok: false, error: <slug>, message: <string>, ...}'
+  errors:
+    - {error: authentication_failed, cause: bad/missing/revoked key, hint: Check ATMOSPORE_API_KEY}
+    - {error: quota_exceeded, cause: daily quota hit, fields: [limit, used, resets_at], hint: Upgrade at https://atmospore.com/plans}
+    - {error: api_error, cause: other 4xx/5xx, fields: [status]}
+    - {error: unexpected_error, cause: unhandled exception}
+quotas:
+  note: Every MCP tool call consumes one Atmospore API request against the key's plan quota.
+  free_tier: 100 calls/day
+  paid_tier: 5000 calls/day (Professional)
+gaps:
+  - No /.well-known/oauth-protected-resource on the MCP host, so auth is undiscoverable before the first call.
+  - Docs and server disagree on the API key prefix (atmo_ vs ak_).
+  - The local server is not on PyPI, so its documented `pip install atmospore-mcp` fails.

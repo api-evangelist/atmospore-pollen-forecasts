@@ -1,0 +1,21 @@
+generated: '2026-08-09'
+method: generated
+source: openapi/atmospore-pollen-forecasts-openapi-original.json
+description: >-
+  Native Arazzo 1.0.1 workflows stitching Atmospore's own operations into multi-step use cases.
+  Every referenced operationId was verified against the published OpenAPI.
+workflows:
+  - file: atmospore-pollen-forecasts-allergy-week-plan.yml
+    workflowId: plan-allergy-week
+    title: Plan an allergy week for a location
+    summary: >-
+      Resolve the species catalogue, rank the week's worst allergens at a coordinate, then pull
+      the day-by-day forecast for the top species.
+    operations: [getSpecies, getPollenTop, getPollenForecast]
+  - file: atmospore-pollen-forecasts-regional-risk-board.yml
+    workflowId: regional-risk-board
+    title: Build a regional pollen risk board
+    summary: >-
+      Resolve categories and thresholds, then read tree/grass/weed avg-min-max aggregates across
+      a radius for a dashboard or a smart-home rule.
+    operations: [getSpecies, getPollenArea]

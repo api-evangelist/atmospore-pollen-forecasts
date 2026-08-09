@@ -1,0 +1,74 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/atmospore-pollen-forecasts-openapi-original.json + live probes of https://pollenapi.com
+format: proprietary
+description: >-
+  Atmospore does NOT use RFC 9457 problem+json. Every error is a flat JSON object with a single
+  `error` string, served as application/json. There is no machine-readable error code, no `type`
+  URI and no field-level detail, so a client can only branch on the HTTP status — the string is
+  prose and may change without notice.
+envelope:
+  content_type: application/json
+  schema: '#/components/schemas/Error'
+  shape: '{"error": "<human-readable message>"}'
+  rfc9457: false
+  machine_code: false
+  request_id_field: false
+  note: >-
+    The gateway does return an `apigw-requestid` response header on every call, which is the
+    only correlation handle available for support.
+problems:
+  - status: 400
+    title: Invalid parameters
+    envelope_example: '{"error": "..."}'
+    causes:
+      - Missing a required query parameter (lon, lat, dt, forecast_days)
+      - forecast_days outside 1-14
+      - radius above the 50000 metre maximum on /v1/pollen-area
+      - Unknown species slug in the `species` filter
+    remediation: >-
+      Validate against components/parameters in the OpenAPI; resolve species slugs from
+      GET /v1/species (unauthenticated) before filtering.
+    source_operations:
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenForecast
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenArea
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenTop
+  - status: 401
+    title: Missing API key
+    envelope_example: '{"error": "Missing API key. Include x-api-key header."}'
+    causes: [No x-api-key request header]
+    remediation: Send x-api-key with a key from https://atmospore.com/account.
+    verified: live 2026-08-09 (GET /v1/pollen with no key)
+    source_operations:
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenForecast
+  - status: 403
+    title: Invalid API key
+    envelope_example: '{"error": "Invalid API key"}'
+    causes: [Unknown, revoked or malformed key]
+    remediation: Reissue the key from the account page. Do not retry — this is not transient.
+    verified: live 2026-08-09 (GET /v1/pollen with a bogus key)
+    source_operations:
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenForecast
+  - status: 429
+    title: Daily quota exceeded
+    envelope_example: '{"error": "..."}'
+    causes: [Plan request allowance exhausted for the current day/month]
+    remediation: >-
+      Back off until the daily reset, or upgrade at https://atmospore.com/plans. The first-party
+      Python client raises RateLimitError carrying .limit, .used and .resets_at, which implies the
+      API returns those values — but they are neither declared in the OpenAPI nor documented.
+    source_operations:
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenForecast
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenArea
+      - openapi/atmospore-pollen-forecasts-openapi-original.json#getPollenTop
+mcp_errors:
+  note: The MCP server wraps these into its own structured envelope — see mcp/atmospore-pollen-forecasts-mcp.yml
+  transport_error:
+    code: -32001
+    message: 'Missing API key. Send `Authorization: Bearer ak_...` or `?key=ak_...`.'
+  tool_errors: [authentication_failed, quota_exceeded, api_error, unexpected_error]
+gaps:
+  - No 5xx responses are declared anywhere in the OpenAPI.
+  - 401, 403 and 429 declare no response content in the spec, only a description.
+  - No stable error codes; clients must branch on HTTP status alone.
+  - Rate-limit metadata (limit/used/resets_at) is consumed by the official SDK but undocumented.

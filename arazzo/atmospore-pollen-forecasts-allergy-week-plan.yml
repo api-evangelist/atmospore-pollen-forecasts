@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Plan an allergy week for a location
+  version: 1.0.0
+  description: >-
+    Resolve the Atmospore species catalogue, rank the worst allergens for the coming week at a
+    coordinate, then pull the day-by-day forecast for the species the user actually reacts to.
+    Every operationId below exists verbatim in the referenced OpenAPI.
+sourceDescriptions:
+  - name: atmospore
+    url: ../openapi/atmospore-pollen-forecasts-openapi-original.json
+    type: openapi
+workflows:
+  - workflowId: plan-allergy-week
+    summary: Rank this week's allergens at a point, then forecast the ones that matter.
+    description: >-
+      Step 1 is unauthenticated and cacheable for 24 hours. Steps 2 and 3 require the x-api-key
+      header. Two API calls per run against the plan quota.
+    inputs:
+      type: object
+      required: [lat, lon, dt]
+      properties:
+        apiKey:
+          type: string
+          description: Atmospore API key from https://atmospore.com/account (x-api-key header).
+        lat:
+          type: number
+          description: Latitude. Example 59.913868 (Oslo).
+        lon:
+          type: number
+          description: Longitude. Example 10.7522 (Oslo).
+        dt:
+          type: string
+          format: date
+          description: Start date, YYYY-MM-DD.
+        forecast_days:
+          type: integer
+          default: 7
+          description: Horizon, 1-14.
+    steps:
+      - stepId: list-species
+        description: >-
+          Resolve the 25 species slugs, categories, localised names and risk thresholds. No API
+          key required; cache for 24 hours (Cache-Control max-age=86400).
+        operationId: getSpecies
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          species_catalogue: $response.body#/data
+          total_species: $response.body#/meta/total_species
+          units: $response.body#/meta/units
+
+      - stepId: rank-allergens
+        description: Rank every species by severity across the requested window.
+        operationId: getPollenTop
+        parameters:
+          - name: lat
+            in: query
+            value: $inputs.lat
+          - name: lon
+            in: query
+            value: $inputs.lon
+          - name: dt
+            in: query
+            value: $inputs.dt
+          - name: forecast_days
+            in: query
+            value: $inputs.forecast_days
+          - name: x-api-key
+            in: header
+            value: $inputs.apiKey
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          ranked: $response.body#/data
+          worst_species: $response.body#/data/0/species
+          worst_display_name: $response.body#/data/0/display_name
+          date_range: $response.body#/meta/date_range
+
+      - stepId: daily-detail-for-worst
+        description: >-
+          Pull the day-by-day point forecast filtered to the worst-ranked species, so the answer
+          can name the specific days to avoid.
+        operationId: getPollenForecast
+        parameters:
+          - name: lat
+            in: query
+            value: $inputs.lat
+          - name: lon
+            in: query
+            value: $inputs.lon
+          - name: dt
+            in: query
+            value: $inputs.dt
+          - name: forecast_days
+            in: query
+            value: $inputs.forecast_days
+          - name: species
+            in: query
+            value: $steps.rank-allergens.outputs.worst_species
+          - name: x-api-key
+            in: header
+            value: $inputs.apiKey
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          days: $response.body#/data
+          generated_at: $response.body#/meta/generated_at
+    outputs:
+      worst_species: $steps.rank-allergens.outputs.worst_display_name
+      daily_detail: $steps.daily-detail-for-worst.outputs.days
+      units: $steps.list-species.outputs.units

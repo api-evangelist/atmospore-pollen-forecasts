@@ -1,0 +1,60 @@
+generated: '2026-08-09'
+method: searched
+source: https://atmospore.com/plans
+description: >-
+  Quotas are monthly request allowances attached to the billing plan, enforced with a daily
+  ceiling. They are advertised on the pricing page only — nothing is declared in the OpenAPI and
+  no rate-limit headers are returned on the wire.
+enforcement:
+  scope: api-key
+  window: monthly allowance with an approximate daily cap
+  exceeded_status: 429
+  exceeded_body: '{"error": "..."}'
+  response_headers: []
+  retry_after: false
+  probe: >-
+    GET https://pollenapi.com/v1/species on 2026-08-09 returned no RateLimit-*, X-RateLimit-*
+    or Retry-After headers.
+rate_limits:
+  - plan: Free
+    limit_count: 3000
+    limit_period: month
+    daily_equivalent: 100
+    unit: requests
+    price: {amount: 0, currency: EUR, period: month}
+  - plan: Starter
+    limit_count: 15000
+    limit_period: month
+    daily_equivalent: 500
+    unit: requests
+    price: {amount: 9, currency: EUR, period: month}
+  - plan: Professional
+    limit_count: 150000
+    limit_period: month
+    daily_equivalent: 5000
+    unit: requests
+    price: {amount: 39, currency: EUR, period: month}
+  - plan: Enterprise
+    limit_count: 1500000
+    limit_period: month
+    daily_equivalent: 50000
+    unit: requests
+    price: {amount: 149, currency: EUR, period: month}
+  - plan: Custom
+    limit_count: null
+    limit_period: null
+    unit: requests
+    note: Negotiated. Contact sales.
+not_metered:
+  - surface: embeddable widget
+    url: https://atmospore.com/widgets
+    note: >-
+      "Widget loads are served from CloudFront, so they don't count against any API quota" —
+      unlimited embeds, no key required.
+mcp:
+  note: Every MCP tool call consumes one API request against the key's plan quota.
+  source: https://github.com/atmospore/atmospore-mcp
+gaps:
+  - No rate-limit response headers; a client cannot pace itself before the 429.
+  - No documented burst/per-second limit, only the aggregate allowance.
+  - The first-party Python client exposes .limit/.used/.resets_at on RateLimitError, implying the 429 body carries them, but that body is undocumented and undeclared in the spec.

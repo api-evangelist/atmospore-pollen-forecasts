@@ -1,0 +1,94 @@
+generated: '2026-08-09'
+method: searched
+source: https://atmospore.com/api-docs
+derived_from: openapi/atmospore-pollen-forecasts-openapi-original.json
+description: >-
+  Cross-cutting request/response semantics for the Atmospore Pollen Forecast API. The surface is
+  four read-only GET operations with a single query-string grammar shared across all of them, so
+  most conventions are inherited from that one parameter set.
+authentication:
+  style: api-key
+  transport: {in: header, name: x-api-key}
+  exceptions:
+    - {operation: getSpecies, path: /v1/species, requirement: none, note: 'security: [] in the spec, confirmed live'}
+  mcp_transport: {in: header, name: Authorization, format: 'Bearer ak_...', alternative: '?key=ak_...'}
+  cross_reference: authentication/atmospore-pollen-forecasts-authentication.yml
+idempotency:
+  supported: false
+  idempotency_key_header: null
+  note: >-
+    Every operation is a GET, so requests are idempotent by HTTP method semantics, but there is
+    NO idempotency-key contract because there are no write operations to protect. No
+    `Idempotency` pointer is wired in apis.yml — the API has nothing to be idempotent about.
+pagination:
+  supported: false
+  note: >-
+    Result size is bounded by the forecast horizon (forecast_days 1-14) and the fixed 25-species
+    catalogue, so no page/cursor mechanism exists. /v1/pollen-top is ranked and truncated by the
+    caller, not the server (the MCP tool's `limit` has no REST equivalent).
+filtering:
+  species:
+    parameter: species
+    style: comma-separated slugs
+    groups: [tree, grass, weed, all]
+    aggregates: [tree_tot, grass_tot, weed_tot]
+    default: all species
+    resolve_from: GET /v1/species
+  geography:
+    point: {lat: number, lon: number}
+    area: {radius: integer, units: metres, default: 25000, maximum: 50000}
+    coverage: global grid at ~28 km resolution
+  time:
+    parameter: dt
+    format: date (YYYY-MM-DD)
+    horizon: {parameter: forecast_days, min: 1, max: 14}
+    note: >-
+      The published plan tiers advertise a 7-day forecast while the contract accepts up to 14 —
+      the spec ceiling and the commercial ceiling do not agree.
+field_expansion:
+  supported: false
+metadata:
+  every_response_carries: meta
+  meta_fields:
+    - {field: location, shape: '{lat, lon}'}
+    - {field: units, value: 'grains/m³'}
+    - {field: generated_at, format: RFC 3339}
+    - {field: radius, operations: [getPollenArea]}
+    - {field: date_range, operations: [getPollenTop]}
+  payload_root: data
+request_tracing:
+  request_id_header: apigw-requestid
+  echoed_in_body: false
+  note: AWS API Gateway request id on every response; not documented, but it is the only correlation handle.
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_version: 1.0.0
+  cross_reference: lifecycle/atmospore-pollen-forecasts-lifecycle.yml
+error_envelope:
+  shape: '{"error": "<message>"}'
+  rfc9457: false
+  cross_reference: errors/atmospore-pollen-forecasts-problem-types.yml
+rate_limit_signaling:
+  response_headers: false
+  probe: >-
+    GET /v1/species on 2026-08-09 returned no RateLimit-*, X-RateLimit-* or Retry-After headers.
+  signal: HTTP 429 only, with no machine-readable remaining/reset values on the wire.
+  cross_reference: rate-limits/atmospore-pollen-forecasts-rate-limits.yml
+caching:
+  headers:
+    - {operation: getSpecies, header: 'Cache-Control: max-age=86400', guidance: docs advise caching client-side}
+    - {operation: getPollenForecast, header: 'Cache-Control: public, max-age=3600, s-maxage=3600'}
+  data_refresh: daily; forecasts are refined as the target date approaches
+content_negotiation:
+  response: application/json only
+  spec_formats:
+    - 'JSON at https://pollenapi.com/openapi.json (valid)'
+    - 'YAML at https://pollenapi.com/v1/openapi?format=yaml (DOES NOT PARSE: security:[] and ApiKeyAuth:[] are emitted without the space YAML requires after a mapping colon)'
+cors:
+  vary: 'Origin, Accept-Encoding'
+  note: Vary:Origin is present on API responses, implying per-origin CORS; no policy is documented.
+gaps:
+  - No rate-limit response headers, so clients cannot back off before hitting 429.
+  - No documented CORS policy despite the widget being browser-delivered.
+  - Spec allows forecast_days up to 14; pricing page advertises 7.

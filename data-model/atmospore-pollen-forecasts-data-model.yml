@@ -1,0 +1,85 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/atmospore-pollen-forecasts-openapi-original.json + examples/atmospore-pollen-forecasts-species-200.json
+description: >-
+  Atmospore has no persistent resource model — there are no ids, no CRUD, and nothing belongs to
+  anything. The data model is a lookup graph: a Species catalogue keyed by slug, and three
+  read projections of a gridded forecast keyed by (location, date, species).
+entities:
+  - name: Species
+    kind: catalogue
+    key: slug
+    key_examples: [birch, betulaceae, hazel, alder, pine, spruce, pinaceae, elm, salix, oak, maple, hickory, populus, cypress, platanus, fraxinus, timothy, bermuda, lolium, dactylis, arrhenatherum, poa, urtica, artemisia, ambrosia]
+    count: 25
+    source_operation: getSpecies
+    fields:
+      - {field: display_name, type: string}
+      - {field: category, type: enum, values: [tree, grass, weed]}
+      - {field: names, type: map, keys: [en, sv, 'no'], note: localised display names}
+      - {field: risk_thresholds, type: 'array[number]', note: 'four concentration cut-points, e.g. [15, 90, 500, 1500]'}
+      - {field: risk_labels, type: 'array[string]', values: [low, moderate, high, 'very high']}
+    aggregate_pseudo_species: [tree_tot, grass_tot, weed_tot]
+    note: >-
+      Slugs are the join key across the entire API. `tree`, `grass`, `weed` and `all` are group
+      selectors accepted by the `species` query parameter; `tree_tot`/`grass_tot`/`weed_tot` are
+      the aggregate keys returned by /v1/pollen-area.
+  - name: Location
+    kind: value object
+    fields:
+      - {field: lat, type: number}
+      - {field: lon, type: number}
+      - {field: radius, type: integer, units: metres, applies_to: area queries}
+    resolution: ~28 km global grid
+    note: Not addressable — there is no location id and no location resource.
+  - name: DailyPollen
+    kind: projection
+    key: [location, date]
+    source_operation: getPollenForecast
+    schema_ref: '#/components/schemas/SpeciesData'
+    fields:
+      - {field: date, type: 'string(date)'}
+      - {field: overall_risk, type: enum, values: [low, moderate, high, 'very high']}
+      - {field: species, type: 'map<species_slug, SpeciesData>'}
+    species_data_fields: [value, risk_level, display_name, category]
+    units: grains/m3
+  - name: AreaPollen
+    kind: projection
+    key: [location, radius, date]
+    source_operation: getPollenArea
+    schema_ref: '#/components/schemas/AreaSpeciesData'
+    fields:
+      - {field: date, type: 'string(date)'}
+      - {field: overall_risk, type: enum}
+      - {field: species, type: 'map<species_slug, AreaSpeciesData>'}
+    area_species_data_fields: [avg, min, max, risk_level, display_name, category]
+  - name: TopSpecies
+    kind: projection
+    key: [location, date_range]
+    source_operation: getPollenTop
+    schema_ref: '#/components/schemas/TopSpeciesData'
+    fields: [species, display_name, category, max, avg, risk_level]
+    ordering: ranked by severity, highest first
+  - name: Meta
+    kind: envelope
+    present_on: all operations
+    fields: [location, units, generated_at, radius, date_range, total_species, categories, risk_levels]
+  - name: Error
+    kind: envelope
+    schema_ref: '#/components/schemas/Error'
+    fields: [error]
+relationships:
+  - {from: DailyPollen, to: Species, type: has_many, via: 'species map key (slug)', cardinality: '1..25'}
+  - {from: AreaPollen, to: Species, type: has_many, via: 'species map key (slug or *_tot aggregate)'}
+  - {from: TopSpecies, to: Species, type: belongs_to, via: species}
+  - {from: DailyPollen, to: Location, type: belongs_to, via: 'meta.location (lat, lon)'}
+  - {from: AreaPollen, to: Location, type: belongs_to, via: 'meta.location + meta.radius'}
+  - {from: TopSpecies, to: Location, type: belongs_to, via: meta.location}
+  - {from: Species, to: Species, type: has_many, via: 'category rollup into tree_tot / grass_tot / weed_tot'}
+id_prefixes:
+  api_key: 'ak_ (per the MCP server error message; the MCP setup article shows atmo_ instead)'
+  resource_ids: none
+integration_note: >-
+  The correct binding order for a client or an agent is: call getSpecies once (unauthenticated,
+  cacheable for 24h) to resolve slugs, categories and risk_thresholds, then use those slugs in the
+  `species` parameter of the three forecast operations. Nothing else in the model needs discovery.
+render: none (no subway/ diagram in this repo)
