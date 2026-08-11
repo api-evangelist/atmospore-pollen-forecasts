@@ -29,62 +29,101 @@ tags:
   - norway
   - climate
 apis:
-  - name: Atmospore Pollen Forecast API
-    description: >-
-      REST API for species-level point and area pollen forecasts, top contributing species, and
-      species metadata. API-key auth via x-api-key header; /v1/species requires no auth. Responses
-      in grains/m³ with risk levels.
-    humanURL: https://atmospore.com/api-docs
-    baseURL: https://pollenapi.com
-    tags:
-      - weather
-      - pollen
-      - allergy
-      - environmental-data
-      - health
-      - geospatial
-      - forecasting
-      - smart-home
-      - mcp
-      - openapi
-    properties:
-      - type: OpenAPI
-        url: openapi/atmospore-pollen-forecasts-openapi-original.json
-      - type: OpenAPI
-        url: https://pollenapi.com/openapi.json
-      - type: Documentation
-        url: https://atmospore.com/api-docs
-      - type: APIReference
-        url: https://atmospore.com/api-docs
-      - type: DeveloperPortal
-        url: https://atmospore.com/api-docs
-  - name: Atmospore MCP Server
-    description: >-
-      Hosted Model Context Protocol server exposing the Atmospore pollen forecast capability as
-      four agent tools (get_pollen, get_top_species, get_area_average, list_supported_species)
-      plus an atmospore://help resource. JSON-RPC 2.0 over HTTP, authenticated with the same
-      Atmospore API key as the REST API. An MIT-licensed local stdio equivalent is published at
-      github.com/atmospore/atmospore-mcp.
-    humanURL: https://atmospore.com/article/mcp
-    baseURL: https://mcp.atmospore.com/mcp
-    tags:
-      - mcp
-      - agents
-      - pollen
-      - allergy
-      - forecasting
-    properties:
-      - type: ToolCrosswalk
-        url: mcp/atmospore-pollen-forecasts-tool-crosswalk.yml
-      - type: SourceCode
-        url: https://github.com/atmospore/atmospore-mcp
-      - type: Documentation
-        url: https://atmospore.com/article/mcp
+- name: Atmospore MCP Server
+  description: >-
+    Hosted Model Context Protocol server exposing the Atmospore pollen forecast capability as four agent
+    tools (get_pollen, get_top_species, get_area_average, list_supported_species) plus an atmospore://help
+    resource. JSON-RPC 2.0 over HTTP, authenticated with the same Atmospore API key as the REST API. An
+    MIT-licensed local stdio equivalent is published at github.com/atmospore/atmospore-mcp.
+  humanURL: https://atmospore.com/article/mcp
+  baseURL: https://mcp.atmospore.com/mcp
+  tags:
+  - mcp
+  - agents
+  - pollen
+  - allergy
+  - forecasting
+  properties:
+  - type: ToolCrosswalk
+    url: mcp/atmospore-pollen-forecasts-tool-crosswalk.yml
+  - type: SourceCode
+    url: https://github.com/atmospore/atmospore-mcp
+  - type: Documentation
+    url: https://atmospore.com/article/mcp
+- aid: atmospore-pollen-forecasts:atmospore-pollen-forecasts-pollen-api
+  name: Atmospore Pollen Forecasts Pollen API
+  description: The Pollen API from Atmospore Pollen Forecasts — 1 operation(s) for pollen.
+  humanURL: https://atmospore.com/api-docs
+  baseURL: https://pollenapi.com
+  tags:
+  - Pollen
+  properties:
+  - type: OpenAPI
+    url: openapi/atmospore-pollen-forecasts-pollen-api-openapi.yml
+  - type: Documentation
+    url: https://atmospore.com/api-docs
+  - type: APIReference
+    url: https://atmospore.com/api-docs
+  - type: DeveloperPortal
+    url: https://atmospore.com/api-docs
+- aid: atmospore-pollen-forecasts:atmospore-pollen-forecasts-pollen-area-api
+  name: Atmospore Pollen Forecasts Pollen Area API
+  description: The Pollen Area API from Atmospore Pollen Forecasts — 1 operation(s) for pollen area.
+  humanURL: https://atmospore.com/api-docs
+  baseURL: https://pollenapi.com
+  tags:
+  - Pollen Area
+  properties:
+  - type: OpenAPI
+    url: openapi/atmospore-pollen-forecasts-pollen-area-api-openapi.yml
+  - type: Documentation
+    url: https://atmospore.com/api-docs
+  - type: APIReference
+    url: https://atmospore.com/api-docs
+  - type: DeveloperPortal
+    url: https://atmospore.com/api-docs
+- aid: atmospore-pollen-forecasts:atmospore-pollen-forecasts-pollen-top-api
+  name: Atmospore Pollen Forecasts Pollen Top API
+  description: The Pollen Top API from Atmospore Pollen Forecasts — 1 operation(s) for pollen top.
+  humanURL: https://atmospore.com/api-docs
+  baseURL: https://pollenapi.com
+  tags:
+  - Pollen Top
+  properties:
+  - type: OpenAPI
+    url: openapi/atmospore-pollen-forecasts-pollen-top-api-openapi.yml
+  - type: Documentation
+    url: https://atmospore.com/api-docs
+  - type: APIReference
+    url: https://atmospore.com/api-docs
+  - type: DeveloperPortal
+    url: https://atmospore.com/api-docs
+- aid: atmospore-pollen-forecasts:atmospore-pollen-forecasts-species-api
+  name: Atmospore Pollen Forecasts Species API
+  description: The Species API from Atmospore Pollen Forecasts — 1 operation(s) for species.
+  humanURL: https://atmospore.com/api-docs
+  baseURL: https://pollenapi.com
+  tags:
+  - Species
+  properties:
+  - type: OpenAPI
+    url: openapi/atmospore-pollen-forecasts-species-api-openapi.yml
+  - type: Documentation
+    url: https://atmospore.com/api-docs
+  - type: APIReference
+    url: https://atmospore.com/api-docs
+  - type: DeveloperPortal
+    url: https://atmospore.com/api-docs
 maintainers:
   - FN: Atmospore Pollen Forecasts
     url: https://atmospore.com/
     email: support@atmospore.com
 common:
+  - type: IssueTracker
+    url: https://github.com/atmospore/atmospore-mcp/issues
+  - type: License
+    name: MIT
+    url: https://github.com/atmospore/atmospore-mcp/blob/main/LICENSE
   - type: Website
     url: https://atmospore.com/
   - type: DeveloperPortal
