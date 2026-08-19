@@ -14,7 +14,7 @@ image: https://atmospore.com/images/logo-bg.png
 url: https://raw.githubusercontent.com/api-evangelist/atmospore-pollen-forecasts/refs/heads/main/apis.yml
 created: '2026-08-03'
 modified: '2026-08-09'
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 tags:
   - weather
   - pollen
