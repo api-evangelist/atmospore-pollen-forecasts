@@ -1,0 +1,321 @@
+{
+  "item": [
+    {
+      "id": "201ee3d3-abe5-4e73-8a13-483fc41c03fd",
+      "name": "Pollen Area",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e2856dc-4802-468f-91a7-173399f3f446",
+          "name": "Area pollen averages",
+          "request": {
+            "name": "Area pollen averages",
+            "description": {
+              "content": "Average, minimum, and maximum pollen levels across a configurable radius. Ideal for regional dashboards and area-wide risk assessment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "pollen-area"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<number>",
+                  "description": "(Required) Longitude coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<number>",
+                  "description": "(Required) Latitude coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "dt",
+                  "value": "<date>",
+                  "description": "(Required) Start date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "forecast_days",
+                  "value": "<integer>",
+                  "description": "(Required) Number of forecast days"
+                },
+                {
+                  "disabled": false,
+                  "key": "species",
+                  "value": "<string>",
+                  "description": "Comma-separated species or groups (tree, grass, weed, all). Defaults to all."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "25000",
+                  "description": "Search radius in meters"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d17f2f37-a2a4-425e-83ed-66f8d89ee5ec",
+              "name": "Area forecast data with min/max/avg",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen-area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "25000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"location\": {\n      \"lat\": 204.9322892667915,\n      \"lon\": 3049.305163795203\n    },\n    \"radius\": 1513,\n    \"units\": \"string\",\n    \"generated_at\": \"2006-10-07T09:02:20.351Z\"\n  },\n  \"data\": [\n    {\n      \"date\": \"1996-02-19\",\n      \"overall_risk\": \"string\",\n      \"species\": {\n        \"key_0\": {\n          \"avg\": 970.5557341166182,\n          \"min\": 8547.674680581133,\n          \"max\": 786.3067258704226,\n          \"risk_level\": \"moderate\",\n          \"display_name\": \"string\",\n          \"category\": \"weed\"\n        },\n        \"key_1\": {\n          \"avg\": 1202.5084511980665,\n          \"min\": 5898.189827909633,\n          \"max\": 1187.9264998917915,\n          \"risk_level\": \"moderate\",\n          \"display_name\": \"string\",\n          \"category\": \"weed\"\n        },\n        \"key_2\": {\n          \"avg\": 3261.5316624037628,\n          \"min\": 265.9192477206762,\n          \"max\": 4055.4990819722525,\n          \"risk_level\": \"high\",\n          \"display_name\": \"string\",\n          \"category\": \"tree\"\n        },\n        \"key_3\": {\n          \"avg\": 9875.412477336155,\n          \"min\": 5034.459955569017,\n          \"max\": 5497.586222538493,\n          \"risk_level\": \"moderate\",\n          \"display_name\": \"string\",\n          \"category\": \"tree\"\n        },\n        \"key_4\": {\n          \"avg\": 3549.5157187560235,\n          \"min\": 1802.2573425971354,\n          \"max\": 1197.3975771241219,\n          \"risk_level\": \"high\",\n          \"display_name\": \"string\",\n          \"category\": \"weed\"\n        }\n      }\n    },\n    {\n      \"date\": \"1986-11-17\",\n      \"overall_risk\": \"string\",\n      \"species\": {\n        \"key_0\": {\n          \"avg\": 2205.026364754694,\n          \"min\": 6405.416813880782,\n          \"max\": 7602.1307964894195,\n          \"risk_level\": \"low\",\n          \"display_name\": \"string\",\n          \"category\": \"tree\"\n        },\n        \"key_1\": {\n          \"avg\": 5948.967092692477,\n          \"min\": 3433.8124016533434,\n          \"max\": 7007.834951678059,\n          \"risk_level\": \"high\",\n          \"display_name\": \"string\",\n          \"category\": \"tree\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bee8cf46-50ee-46e4-bc2e-d3271028c69b",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen-area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "25000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1347343-1b2f-456d-bc79-cd83ce09c21d",
+              "name": "Daily quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen-area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "25000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pollenapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1cd78f42-44b3-43f0-9afb-7056a00a3d7d",
+    "name": "Atmospore Pollen Forecast Pollen Area API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Global pollen forecasts with species-level accuracy. 21 individual species, 14-day forecasts, area averages with min/max, and multilingual species metadata.\n\nContact Support:\n Name: Atmospore\n Email: support@atmospore.com",
+      "type": "text/plain"
+    }
+  }
+}

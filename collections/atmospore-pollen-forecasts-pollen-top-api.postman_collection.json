@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "a04ef2ed-ba15-4ee0-91d4-29aecf7de676",
+      "name": "Pollen Top",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40455c65-9b48-4db0-aa4f-1a9851cdac63",
+          "name": "Top pollen species",
+          "request": {
+            "name": "Top pollen species",
+            "description": {
+              "content": "Top contributing species in a date range, ranked by severity. Returns max and average values aggregated across the period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "pollen-top"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<number>",
+                  "description": "(Required) Longitude coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<number>",
+                  "description": "(Required) Latitude coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "dt",
+                  "value": "<date>",
+                  "description": "(Required) Start date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "forecast_days",
+                  "value": "<integer>",
+                  "description": "(Required) Number of forecast days"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49b897e8-b60e-403d-8485-cf389be9de76",
+              "name": "Top species ranked by severity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen-top"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"location\": {\n      \"lat\": 5559.865068081892,\n      \"lon\": 4602.501458147208\n    },\n    \"units\": \"string\",\n    \"date_range\": [\n      \"1955-11-17\",\n      \"1993-04-08\"\n    ],\n    \"generated_at\": \"1952-12-09T02:36:40.383Z\"\n  },\n  \"data\": [\n    {\n      \"species\": \"string\",\n      \"display_name\": \"string\",\n      \"category\": \"tree\",\n      \"max\": 4440.679033093337,\n      \"avg\": 5103.558599600935,\n      \"risk_level\": \"moderate\"\n    },\n    {\n      \"species\": \"string\",\n      \"display_name\": \"string\",\n      \"category\": \"weed\",\n      \"max\": 93.9418854125451,\n      \"avg\": 3890.6085066058426,\n      \"risk_level\": \"very high\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fb17a89-a55e-4d25-89bb-44598b059bc8",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen-top"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06e65d2c-83e1-4d75-87b6-6a33bf13cd6c",
+              "name": "Daily quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen-top"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pollenapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3bfbc39b-8456-4ce6-afe3-69430a1d61bf",
+    "name": "Atmospore Pollen Forecast Pollen Top API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Global pollen forecasts with species-level accuracy. 21 individual species, 14-day forecasts, area averages with min/max, and multilingual species metadata.\n\nContact Support:\n Name: Atmospore\n Email: support@atmospore.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atmospore Pollen Forecast Pollen Top API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pollen Top",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Top pollen species",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pollenapi.com/v1/pollen-top",
+            "params": [
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude coordinate"
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude coordinate"
+              },
+              {
+                "name": "dt",
+                "value": "",
+                "type": "query",
+                "description": "Start date (YYYY-MM-DD)"
+              },
+              {
+                "name": "forecast_days",
+                "value": "",
+                "type": "query",
+                "description": "Number of forecast days"
+              }
+            ]
+          },
+          "docs": "Top contributing species in a date range, ranked by severity. Returns max and average values aggregated across the period."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

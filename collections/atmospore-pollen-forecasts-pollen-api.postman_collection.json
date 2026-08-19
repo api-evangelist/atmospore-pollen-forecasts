@@ -1,0 +1,429 @@
+{
+  "item": [
+    {
+      "id": "627ce670-c43a-4bb5-8a6e-0bee99c41425",
+      "name": "Pollen",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "106fe943-9ab5-4bbc-8f92-ee0160655951",
+          "name": "Pollen forecast at a point",
+          "request": {
+            "name": "Pollen forecast at a point",
+            "description": {
+              "content": "Interpolated pollen forecast at a specific coordinate. Returns species-level data with risk levels and an overall daily risk score.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "pollen"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<number>",
+                  "description": "(Required) Longitude coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<number>",
+                  "description": "(Required) Latitude coordinate"
+                },
+                {
+                  "disabled": false,
+                  "key": "dt",
+                  "value": "<date>",
+                  "description": "(Required) Start date (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "forecast_days",
+                  "value": "<integer>",
+                  "description": "(Required) Number of forecast days"
+                },
+                {
+                  "disabled": false,
+                  "key": "species",
+                  "value": "<string>",
+                  "description": "Comma-separated species or groups (tree, grass, weed, all). Defaults to all."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7de1a5b2-eb8d-4984-af11-a097847adc77",
+              "name": "Forecast data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"location\": {\n      \"lat\": 267.4244923635816,\n      \"lon\": 3978.212553257713\n    },\n    \"units\": \"grains/m³\",\n    \"generated_at\": \"1976-06-17T20:36:28.203Z\"\n  },\n  \"data\": [\n    {\n      \"date\": \"1999-04-10\",\n      \"overall_risk\": \"moderate\",\n      \"species\": {\n        \"key_0\": {\n          \"value\": 2583.236995511523,\n          \"risk_level\": \"low\",\n          \"display_name\": \"string\",\n          \"category\": \"grass\"\n        },\n        \"key_1\": {\n          \"value\": 295.0091848346248,\n          \"risk_level\": \"moderate\",\n          \"display_name\": \"string\",\n          \"category\": \"grass\"\n        },\n        \"key_2\": {\n          \"value\": 894.688667837683,\n          \"risk_level\": \"high\",\n          \"display_name\": \"string\",\n          \"category\": \"grass\"\n        }\n      }\n    },\n    {\n      \"date\": \"1953-08-03\",\n      \"overall_risk\": \"high\",\n      \"species\": {\n        \"key_0\": {\n          \"value\": 5134.056697887234,\n          \"risk_level\": \"low\",\n          \"display_name\": \"string\",\n          \"category\": \"weed\"\n        },\n        \"key_1\": {\n          \"value\": 9412.996395384753,\n          \"risk_level\": \"high\",\n          \"display_name\": \"string\",\n          \"category\": \"weed\"\n        },\n        \"key_2\": {\n          \"value\": 4663.853072446203,\n          \"risk_level\": \"low\",\n          \"display_name\": \"string\",\n          \"category\": \"tree\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d3803d-491e-4f05-97df-2f049c02949b",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "077293b9-24be-455c-8d34-bd42da10fe17",
+              "name": "Missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54b92440-8f0a-4985-b36a-d489ec7eef3f",
+              "name": "Invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0ef413c2-6f07-4c3a-a1ce-6da3199076f6",
+              "name": "Daily quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pollen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lon",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "dt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "forecast_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pollenapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f57a73c2-a603-4d83-ba67-f5bafb982770",
+    "name": "Atmospore Forecast Pollen API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Global pollen forecasts with species-level accuracy. 21 individual species, 14-day forecasts, area averages with min/max, and multilingual species metadata.\n\nContact Support:\n Name: Atmospore\n Email: support@atmospore.com",
+      "type": "text/plain"
+    }
+  }
+}

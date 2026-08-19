@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atmospore Pollen Forecast Species API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Species",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Species metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pollenapi.com/v1/species"
+          },
+          "docs": "All supported pollen species with display names in multiple languages, categories, and risk thresholds. No authentication required. Cache this response client-side."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

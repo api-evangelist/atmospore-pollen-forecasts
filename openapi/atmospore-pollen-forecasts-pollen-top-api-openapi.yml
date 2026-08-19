@@ -1,0 +1,130 @@
+openapi: 3.2.0
+info:
+  title: Atmospore Pollen Forecast Pollen Top API
+  description: Global pollen forecasts with species-level accuracy. 21 individual species, 14-day forecasts, area averages with min/max, and multilingual species metadata.
+  version: 1.0.0
+  contact:
+    name: Atmospore
+    url: https://atmospore.com
+    email: support@atmospore.com
+  termsOfService: https://atmospore.com/terms-of-service
+servers:
+- url: https://pollenapi.com
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Pollen Top
+paths:
+  /v1/pollen-top:
+    get:
+      summary: Top pollen species
+      description: Top contributing species in a date range, ranked by severity. Returns max and average values aggregated across the period.
+      operationId: getPollenTop
+      parameters:
+      - $ref: '#/components/parameters/lon'
+      - $ref: '#/components/parameters/lat'
+      - $ref: '#/components/parameters/dt'
+      - $ref: '#/components/parameters/forecast_days'
+      responses:
+        '200':
+          description: Top species ranked by severity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      location:
+                        type: object
+                        properties:
+                          lat:
+                            type: number
+                          lon:
+                            type: number
+                      units:
+                        type: string
+                      date_range:
+                        type: array
+                        items:
+                          type: string
+                          format: date
+                      generated_at:
+                        type: string
+                        format: date-time
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TopSpeciesData'
+        '400':
+          description: Invalid parameters
+        '429':
+          description: Daily quota exceeded
+      tags:
+      - Pollen Top
+components:
+  parameters:
+    dt:
+      name: dt
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+      description: Start date (YYYY-MM-DD)
+    lon:
+      name: lon
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Longitude coordinate
+    forecast_days:
+      name: forecast_days
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 14
+      description: Number of forecast days
+    lat:
+      name: lat
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Latitude coordinate
+  schemas:
+    TopSpeciesData:
+      type: object
+      properties:
+        species:
+          type: string
+        display_name:
+          type: string
+        category:
+          type: string
+          enum:
+          - tree
+          - grass
+          - weed
+        max:
+          type: number
+        avg:
+          type: number
+        risk_level:
+          type: string
+          enum:
+          - low
+          - moderate
+          - high
+          - very high
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key from your Atmospore account settings

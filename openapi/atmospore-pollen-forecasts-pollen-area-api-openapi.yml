@@ -1,0 +1,155 @@
+openapi: 3.2.0
+info:
+  title: Atmospore Pollen Forecast Pollen Area API
+  description: Global pollen forecasts with species-level accuracy. 21 individual species, 14-day forecasts, area averages with min/max, and multilingual species metadata.
+  version: 1.0.0
+  contact:
+    name: Atmospore
+    url: https://atmospore.com
+    email: support@atmospore.com
+  termsOfService: https://atmospore.com/terms-of-service
+servers:
+- url: https://pollenapi.com
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Pollen Area
+paths:
+  /v1/pollen-area:
+    get:
+      summary: Area pollen averages
+      description: Average, minimum, and maximum pollen levels across a configurable radius. Ideal for regional dashboards and area-wide risk assessment.
+      operationId: getPollenArea
+      parameters:
+      - $ref: '#/components/parameters/lon'
+      - $ref: '#/components/parameters/lat'
+      - $ref: '#/components/parameters/dt'
+      - $ref: '#/components/parameters/forecast_days'
+      - $ref: '#/components/parameters/species'
+      - $ref: '#/components/parameters/radius'
+      responses:
+        '200':
+          description: Area forecast data with min/max/avg
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      location:
+                        type: object
+                        properties:
+                          lat:
+                            type: number
+                          lon:
+                            type: number
+                      radius:
+                        type: integer
+                      units:
+                        type: string
+                      generated_at:
+                        type: string
+                        format: date-time
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                        overall_risk:
+                          type: string
+                        species:
+                          type: object
+                          additionalProperties:
+                            $ref: '#/components/schemas/AreaSpeciesData'
+        '400':
+          description: Invalid parameters
+        '429':
+          description: Daily quota exceeded
+      tags:
+      - Pollen Area
+components:
+  parameters:
+    dt:
+      name: dt
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+      description: Start date (YYYY-MM-DD)
+    lon:
+      name: lon
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Longitude coordinate
+    forecast_days:
+      name: forecast_days
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 14
+      description: Number of forecast days
+    lat:
+      name: lat
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Latitude coordinate
+    species:
+      name: species
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-separated species or groups (tree, grass, weed, all). Defaults to all.
+    radius:
+      name: radius
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 25000
+        maximum: 50000
+      description: Search radius in meters
+  schemas:
+    AreaSpeciesData:
+      type: object
+      properties:
+        avg:
+          type: number
+        min:
+          type: number
+        max:
+          type: number
+        risk_level:
+          type: string
+          enum:
+          - low
+          - moderate
+          - high
+          - very high
+        display_name:
+          type: string
+        category:
+          type: string
+          enum:
+          - tree
+          - grass
+          - weed
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key from your Atmospore account settings

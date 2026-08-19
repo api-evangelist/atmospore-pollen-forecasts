@@ -1,0 +1,26 @@
+{
+  "provider": "atmospore-pollen-forecasts",
+  "sources": [
+    "atmospore-pollen-forecasts-pollen-api-openapi.yml",
+    "atmospore-pollen-forecasts-pollen-area-api-openapi.yml",
+    "atmospore-pollen-forecasts-pollen-top-api-openapi.yml",
+    "atmospore-pollen-forecasts-species-api-openapi.yml"
+  ],
+  "outputs": [
+    "atmospore-pollen-forecasts-pollen-api-openapi.yml",
+    "atmospore-pollen-forecasts-pollen-area-api-openapi.yml",
+    "atmospore-pollen-forecasts-pollen-top-api-openapi.yml",
+    "atmospore-pollen-forecasts-species-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "atmospore-pollen-forecasts-pollen-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "atmospore-pollen-forecasts-pollen-area-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "atmospore-pollen-forecasts-pollen-top-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "atmospore-pollen-forecasts-species-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

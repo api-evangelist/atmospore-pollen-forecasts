@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "4fac68c7-2dcd-483b-80ee-9ea00ea9de4a",
+      "name": "Species",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89abca82-8305-4e2d-ab2e-b56977f08625",
+          "name": "Species metadata",
+          "request": {
+            "name": "Species metadata",
+            "description": {
+              "content": "All supported pollen species with display names in multiple languages, categories, and risk thresholds. No authentication required. Cache this response client-side.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "species"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70fd89e3-4787-4baf-9afb-2601af83b600",
+              "name": "Species metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "species"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"total_species\": 2740,\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"risk_levels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"units\": \"string\"\n  },\n  \"data\": {\n    \"key_0\": {\n      \"display_name\": \"string\",\n      \"category\": \"string\",\n      \"names\": {\n        \"key_0\": \"string\"\n      },\n      \"risk_thresholds\": [\n        2692.9032505476966,\n        6600.190178779004\n      ]\n    },\n    \"key_1\": {\n      \"display_name\": \"string\",\n      \"category\": \"string\",\n      \"names\": {\n        \"key_0\": \"string\"\n      },\n      \"risk_thresholds\": [\n        1530.3479265613607,\n        9044.638966418286\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pollenapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cebc7449-bae4-471d-86bd-97599407dad6",
+    "name": "Atmospore Pollen Forecast Species API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Global pollen forecasts with species-level accuracy. 21 individual species, 14-day forecasts, area averages with min/max, and multilingual species metadata.\n\nContact Support:\n Name: Atmospore\n Email: support@atmospore.com",
+      "type": "text/plain"
+    }
+  }
+}
