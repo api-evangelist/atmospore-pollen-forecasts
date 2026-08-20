@@ -16,6 +16,19 @@ created: '2026-08-03'
 modified: '2026-08-09'
 specificationVersion: '0.23'
 tags:
+  - Weather
+  - Pollen
+  - Allergy
+  - Environmental Data
+  - Health
+  - Geospatial
+  - Forecasting
+  - Smart Home
+  - MCP
+  - OpenAPI
+  - Norway
+  - Climate
+tags_raw:
   - weather
   - pollen
   - allergy
@@ -38,6 +51,12 @@ apis:
   humanURL: https://atmospore.com/article/mcp
   baseURL: https://mcp.atmospore.com/mcp
   tags:
+  - MCP
+  - Agents
+  - Pollen
+  - Allergy
+  - Forecasting
+  tags_raw:
   - mcp
   - agents
   - pollen
