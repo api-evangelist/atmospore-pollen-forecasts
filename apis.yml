@@ -10,6 +10,20 @@ description: >-
   tools, and a keyless embeddable iframe widget that consumes no API quota. Point forecasts, area
   averages with min/max across a radius, and severity-ranked top species are all available up to
   14 days ahead; species metadata is served unauthenticated.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://atmospore.com/images/logo-bg.png
 url: https://raw.githubusercontent.com/api-evangelist/atmospore-pollen-forecasts/refs/heads/main/apis.yml
 created: '2026-08-03'
