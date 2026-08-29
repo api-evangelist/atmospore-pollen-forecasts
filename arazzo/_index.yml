@@ -1,7 +1,7 @@
-generated: '2026-08-09'
-method: generated
-source: openapi/atmospore-pollen-forecasts-openapi-original.json
-description: >-
+x-generated: '2026-08-09'
+x-method: generated
+x-source: openapi/atmospore-pollen-forecasts-openapi-original.json
+x-description: >-
   Native Arazzo 1.0.1 workflows stitching Atmospore's own operations into multi-step use cases.
   Every referenced operationId was verified against the published OpenAPI.
 workflows:

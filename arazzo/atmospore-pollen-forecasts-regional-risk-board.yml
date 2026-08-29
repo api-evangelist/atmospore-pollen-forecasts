@@ -7,86 +7,89 @@ info:
     regional dashboard or a smart-home ventilation rule. Every operationId exists verbatim in the
     referenced OpenAPI.
 sourceDescriptions:
-  - name: atmospore
-    url: ../openapi/atmospore-pollen-forecasts-openapi-original.json
-    type: openapi
+- name: pollenAreaApi
+  url: ../openapi/atmospore-pollen-forecasts-pollen-area-api-openapi.yml
+  type: openapi
+- name: speciesApi
+  url: ../openapi/atmospore-pollen-forecasts-species-api-openapi.yml
+  type: openapi
 workflows:
-  - workflowId: regional-risk-board
-    summary: Category-level pollen aggregates and trend over an area.
-    description: >-
-      One unauthenticated metadata call plus one authenticated area call. NOTE the radius unit —
-      the API takes METRES (default 25000, max 50000), while the Atmospore MCP tool
-      get_area_average takes kilometres.
-    inputs:
-      type: object
-      required: [lat, lon, dt]
-      properties:
-        apiKey:
-          type: string
-          description: Atmospore API key from https://atmospore.com/account (x-api-key header).
-        lat:
-          type: number
-          description: Centre latitude. Example 51.51 (London).
-        lon:
-          type: number
-          description: Centre longitude. Example -0.13 (London).
-        dt:
-          type: string
-          format: date
-          description: Start date, YYYY-MM-DD.
-        forecast_days:
-          type: integer
-          default: 7
-          description: Horizon, 1-14.
-        radius:
-          type: integer
-          default: 25000
-          description: Search radius in METRES. Maximum 50000.
-    steps:
-      - stepId: list-species
-        description: Resolve categories and risk thresholds for labelling the board. No API key required.
-        operationId: getSpecies
-        successCriteria:
-          - condition: $statusCode == 200
-        outputs:
-          categories: $response.body#/meta/categories
-          risk_levels: $response.body#/meta/risk_levels
-          units: $response.body#/meta/units
-
-      - stepId: area-aggregates
-        description: >-
-          Average, minimum and maximum for the tree, grass and weed rollups across the radius,
-          one entry per day.
-        operationId: getPollenArea
-        parameters:
-          - name: lat
-            in: query
-            value: $inputs.lat
-          - name: lon
-            in: query
-            value: $inputs.lon
-          - name: dt
-            in: query
-            value: $inputs.dt
-          - name: forecast_days
-            in: query
-            value: $inputs.forecast_days
-          - name: radius
-            in: query
-            value: $inputs.radius
-          - name: species
-            in: query
-            value: tree_tot,grass_tot,weed_tot
-          - name: x-api-key
-            in: header
-            value: $inputs.apiKey
-        successCriteria:
-          - condition: $statusCode == 200
-        outputs:
-          days: $response.body#/data
-          radius_echo: $response.body#/meta/radius
-          generated_at: $response.body#/meta/generated_at
+- workflowId: regional-risk-board
+  summary: Category-level pollen aggregates and trend over an area.
+  description: >-
+    One unauthenticated metadata call plus one authenticated area call. NOTE the radius unit —
+    the API takes METRES (default 25000, max 50000), while the Atmospore MCP tool
+    get_area_average takes kilometres.
+  inputs:
+    type: object
+    required: [lat, lon, dt]
+    properties:
+      apiKey:
+        type: string
+        description: Atmospore API key from https://atmospore.com/account (x-api-key header).
+      lat:
+        type: number
+        description: Centre latitude. Example 51.51 (London).
+      lon:
+        type: number
+        description: Centre longitude. Example -0.13 (London).
+      dt:
+        type: string
+        format: date
+        description: Start date, YYYY-MM-DD.
+      forecast_days:
+        type: integer
+        default: 7
+        description: Horizon, 1-14.
+      radius:
+        type: integer
+        default: 25000
+        description: Search radius in METRES. Maximum 50000.
+  steps:
+  - stepId: list-species
+    description: Resolve categories and risk thresholds for labelling the board. No API key required.
+    operationId: getSpecies
+    successCriteria:
+    - condition: $statusCode == 200
     outputs:
-      board: $steps.area-aggregates.outputs.days
-      units: $steps.list-species.outputs.units
-      risk_levels: $steps.list-species.outputs.risk_levels
+      categories: $response.body#/meta/categories
+      risk_levels: $response.body#/meta/risk_levels
+      units: $response.body#/meta/units
+
+  - stepId: area-aggregates
+    description: >-
+      Average, minimum and maximum for the tree, grass and weed rollups across the radius,
+      one entry per day.
+    operationId: getPollenArea
+    parameters:
+    - name: lat
+      in: query
+      value: $inputs.lat
+    - name: lon
+      in: query
+      value: $inputs.lon
+    - name: dt
+      in: query
+      value: $inputs.dt
+    - name: forecast_days
+      in: query
+      value: $inputs.forecast_days
+    - name: radius
+      in: query
+      value: $inputs.radius
+    - name: species
+      in: query
+      value: tree_tot,grass_tot,weed_tot
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      days: $response.body#/data
+      radius_echo: $response.body#/meta/radius
+      generated_at: $response.body#/meta/generated_at
+  outputs:
+    board: $steps.area-aggregates.outputs.days
+    units: $steps.list-species.outputs.units
+    risk_levels: $steps.list-species.outputs.risk_levels
