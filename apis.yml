@@ -30,18 +30,18 @@ created: '2026-08-03'
 modified: '2026-08-09'
 specificationVersion: '0.23'
 tags:
-  - weather
-  - pollen
-  - allergy
-  - environmental-data
+  - Weather
+  - Pollen
+  - Allergy
+  - Environmental Data
   - Health
-  - geospatial
-  - forecasting
-  - smart-home
+  - Geospatial
+  - Forecasting
+  - Smart Home
   - MCP
   - OpenAPI
-  - norway
-  - climate
+  - Norway
+  - Climate
 tags_raw:
   - weather
   - pollen
@@ -67,9 +67,9 @@ apis:
   tags:
   - MCP
   - Agents
-  - pollen
-  - allergy
-  - forecasting
+  - Pollen
+  - Allergy
+  - Forecasting
   tags_raw:
   - mcp
   - agents
