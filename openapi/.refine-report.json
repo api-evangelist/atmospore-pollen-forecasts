@@ -1,10 +1,7 @@
 {
   "provider": "atmospore-pollen-forecasts",
   "sources": [
-    "atmospore-pollen-forecasts-pollen-api-openapi.yml",
-    "atmospore-pollen-forecasts-pollen-area-api-openapi.yml",
-    "atmospore-pollen-forecasts-pollen-top-api-openapi.yml",
-    "atmospore-pollen-forecasts-species-api-openapi.yml"
+    "_original/atmospore-pollen-forecasts-openapi-original.json"
   ],
   "outputs": [
     "atmospore-pollen-forecasts-pollen-api-openapi.yml",
@@ -16,11 +13,22 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "atmospore-pollen-forecasts-pollen-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "atmospore-pollen-forecasts-pollen-area-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "atmospore-pollen-forecasts-pollen-top-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "atmospore-pollen-forecasts-species-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "atmospore-pollen-forecasts-openapi-original.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "atmospore-pollen-forecasts-openapi-original.json: tagged paths GET /v1/pollen -> Pollen",
+    "atmospore-pollen-forecasts-openapi-original.json: tagged paths GET /v1/pollen-area -> Pollen Area",
+    "atmospore-pollen-forecasts-openapi-original.json: tagged paths GET /v1/pollen-top -> Pollen Top",
+    "atmospore-pollen-forecasts-openapi-original.json: tagged paths GET /v1/species -> Species",
+    "atmospore-pollen-forecasts-openapi-original.json: declared missing tag: Pollen",
+    "atmospore-pollen-forecasts-openapi-original.json: declared missing tag: Pollen Area",
+    "atmospore-pollen-forecasts-openapi-original.json: declared missing tag: Pollen Top",
+    "atmospore-pollen-forecasts-openapi-original.json: declared missing tag: Species",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "atmospore-pollen-forecasts-pollen-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "atmospore-pollen-forecasts-pollen-area-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "atmospore-pollen-forecasts-pollen-top-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "atmospore-pollen-forecasts-species-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

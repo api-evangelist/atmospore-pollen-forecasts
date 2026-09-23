@@ -85,51 +85,7 @@ paths:
       tags:
       - Pollen
 components:
-  parameters:
-    dt:
-      name: dt
-      in: query
-      required: true
-      schema:
-        type: string
-        format: date
-      description: Start date (YYYY-MM-DD)
-    lon:
-      name: lon
-      in: query
-      required: true
-      schema:
-        type: number
-      description: Longitude coordinate
-    forecast_days:
-      name: forecast_days
-      in: query
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 14
-      description: Number of forecast days
-    lat:
-      name: lat
-      in: query
-      required: true
-      schema:
-        type: number
-      description: Latitude coordinate
-    species:
-      name: species
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-separated species or groups (tree, grass, weed, all). Defaults to all.
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
     SpeciesData:
       type: object
       properties:
@@ -152,6 +108,50 @@ components:
           - tree
           - grass
           - weed
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  parameters:
+    species:
+      name: species
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-separated species or groups (tree, grass, weed, all). Defaults to all.
+    lon:
+      name: lon
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Longitude coordinate
+    forecast_days:
+      name: forecast_days
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 14
+      description: Number of forecast days
+    dt:
+      name: dt
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+      description: Start date (YYYY-MM-DD)
+    lat:
+      name: lat
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Latitude coordinate
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
