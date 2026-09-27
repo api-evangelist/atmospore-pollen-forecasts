@@ -66,13 +66,14 @@ paths:
       - Pollen Top
 components:
   parameters:
-    lon:
-      name: lon
+    dt:
+      name: dt
       in: query
       required: true
       schema:
-        type: number
-      description: Longitude coordinate
+        type: string
+        format: date
+      description: Start date (YYYY-MM-DD)
     forecast_days:
       name: forecast_days
       in: query
@@ -82,14 +83,13 @@ components:
         minimum: 1
         maximum: 14
       description: Number of forecast days
-    dt:
-      name: dt
+    lon:
+      name: lon
       in: query
       required: true
       schema:
-        type: string
-        format: date
-      description: Start date (YYYY-MM-DD)
+        type: number
+      description: Longitude coordinate
     lat:
       name: lat
       in: query
