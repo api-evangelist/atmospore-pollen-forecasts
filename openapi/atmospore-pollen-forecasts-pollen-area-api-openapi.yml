@@ -74,6 +74,54 @@ paths:
       tags:
       - Pollen Area
 components:
+  parameters:
+    species:
+      name: species
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-separated species or groups (tree, grass, weed, all). Defaults to all.
+    dt:
+      name: dt
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+      description: Start date (YYYY-MM-DD)
+    forecast_days:
+      name: forecast_days
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 14
+      description: Number of forecast days
+    lat:
+      name: lat
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Latitude coordinate
+    radius:
+      name: radius
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 25000
+        maximum: 50000
+      description: Search radius in meters
+    lon:
+      name: lon
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Longitude coordinate
   schemas:
     AreaSpeciesData:
       type: object
@@ -99,54 +147,6 @@ components:
           - tree
           - grass
           - weed
-  parameters:
-    dt:
-      name: dt
-      in: query
-      required: true
-      schema:
-        type: string
-        format: date
-      description: Start date (YYYY-MM-DD)
-    forecast_days:
-      name: forecast_days
-      in: query
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 14
-      description: Number of forecast days
-    lon:
-      name: lon
-      in: query
-      required: true
-      schema:
-        type: number
-      description: Longitude coordinate
-    lat:
-      name: lat
-      in: query
-      required: true
-      schema:
-        type: number
-      description: Latitude coordinate
-    species:
-      name: species
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-separated species or groups (tree, grass, weed, all). Defaults to all.
-    radius:
-      name: radius
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 25000
-        maximum: 50000
-      description: Search radius in meters
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
