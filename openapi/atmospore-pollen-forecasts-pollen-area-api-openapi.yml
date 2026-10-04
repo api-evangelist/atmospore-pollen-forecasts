@@ -75,37 +75,6 @@ paths:
       - Pollen Area
 components:
   parameters:
-    species:
-      name: species
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-separated species or groups (tree, grass, weed, all). Defaults to all.
-    dt:
-      name: dt
-      in: query
-      required: true
-      schema:
-        type: string
-        format: date
-      description: Start date (YYYY-MM-DD)
-    forecast_days:
-      name: forecast_days
-      in: query
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 14
-      description: Number of forecast days
-    lat:
-      name: lat
-      in: query
-      required: true
-      schema:
-        type: number
-      description: Latitude coordinate
     radius:
       name: radius
       in: query
@@ -115,6 +84,20 @@ components:
         default: 25000
         maximum: 50000
       description: Search radius in meters
+    species:
+      name: species
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-separated species or groups (tree, grass, weed, all). Defaults to all.
+    lat:
+      name: lat
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Latitude coordinate
     lon:
       name: lon
       in: query
@@ -122,6 +105,23 @@ components:
       schema:
         type: number
       description: Longitude coordinate
+    forecast_days:
+      name: forecast_days
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 14
+      description: Number of forecast days
+    dt:
+      name: dt
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+      description: Start date (YYYY-MM-DD)
   schemas:
     AreaSpeciesData:
       type: object
