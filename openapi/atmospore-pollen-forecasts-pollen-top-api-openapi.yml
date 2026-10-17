@@ -65,6 +65,38 @@ paths:
       tags:
       - Pollen Top
 components:
+  parameters:
+    lon:
+      name: lon
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Longitude coordinate
+    dt:
+      name: dt
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+      description: Start date (YYYY-MM-DD)
+    lat:
+      name: lat
+      in: query
+      required: true
+      schema:
+        type: number
+      description: Latitude coordinate
+    forecast_days:
+      name: forecast_days
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 14
+      description: Number of forecast days
   schemas:
     TopSpeciesData:
       type: object
@@ -90,38 +122,6 @@ components:
           - moderate
           - high
           - very high
-  parameters:
-    lat:
-      name: lat
-      in: query
-      required: true
-      schema:
-        type: number
-      description: Latitude coordinate
-    lon:
-      name: lon
-      in: query
-      required: true
-      schema:
-        type: number
-      description: Longitude coordinate
-    forecast_days:
-      name: forecast_days
-      in: query
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 14
-      description: Number of forecast days
-    dt:
-      name: dt
-      in: query
-      required: true
-      schema:
-        type: string
-        format: date
-      description: Start date (YYYY-MM-DD)
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
