@@ -71,3 +71,9 @@ components:
       in: header
       name: x-api-key
       description: API key from your Atmospore account settings
+x-provenance:
+  method: harvested
+  publisher: Atmospore Pollen Forecasts
+  source: https://pollenapi.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
