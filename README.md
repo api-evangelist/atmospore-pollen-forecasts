@@ -1,4 +1,4 @@
-# Atmospore Pollen Forecasts (atmospore-pollen-forecasts)
+# Atmospore Pollen Forecasts
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,178 +66,150 @@
 
 Atmospore is an Oslo-based provider of AI-driven global pollen and allergy forecasting. Its model combines GFS weather data with ground-truth observations from professional aerobiology networks to produce species-level forecasts on a ~28 km global grid, covering 25 individual tree, grass and weed species with multilingual metadata (English, Norwegian, Swedish) and published concentration thresholds for low/moderate/high/very-high risk. The surface is delivered three ways: a four-operation REST API at pollenapi.com with a live OpenAPI 3.0.3 contract, a hosted Model Context Protocol server at mcp.atmospore.com exposing the same capability as four agent tools, and a keyless embeddable iframe widget that consumes no API quota. Point forecasts, area averages with min/max across a radius, and severity-ranked top species are all available up to 14 days ahead; species metadata is served unauthenticated.
 
-**APIs.json:** [https://atmospore-pollen-forecasts.apievangelist.com/apis.yml](https://atmospore-pollen-forecasts.apievangelist.com/apis.yml)
+**Areas:** Weather · Pollen · Allergy · Environmental Data · Health · Geospatial · Forecasting · Smart Home · MCP · OpenAPI · Norway · Climate
 
-## Tags
+## Atmospore Pollen Forecasts on APIs.io
 
-- weather
-- pollen
-- allergy
-- environmental-data
-- health
-- geospatial
-- forecasting
-- smart-home
-- mcp
-- openapi
-- norway
-- climate
+Everything profiled for Atmospore Pollen Forecasts is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/atmospore-pollen-forecasts/](https://apis.io/providers/atmospore-pollen-forecasts/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-08-03
-- **Modified:** 2026-08-09
+- [Atmospore MCP Server](https://apis.io/apis/atmospore-pollen-forecasts/atmospore-mcp-server/) — Hosted Model Context Protocol server exposing the Atmospore pollen forecast capability as four agent tools (get_pollen, get_top_species, get_area_average,…
+- [Atmospore Pollen Forecasts Pollen API](https://apis.io/apis/atmospore-pollen-forecasts/atmospore-pollen-forecasts-pollen-api/) — The Pollen API from Atmospore Pollen Forecasts — 1 operation(s) for pollen.
+- [Atmospore Pollen Forecasts Pollen Area API](https://apis.io/apis/atmospore-pollen-forecasts/atmospore-pollen-forecasts-pollen-area-api/) — The Pollen Area API from Atmospore Pollen Forecasts — 1 operation(s) for pollen area.
+- [Atmospore Pollen Forecasts Pollen Top API](https://apis.io/apis/atmospore-pollen-forecasts/atmospore-pollen-forecasts-pollen-top-api/) — The Pollen Top API from Atmospore Pollen Forecasts — 1 operation(s) for pollen top.
+- [Atmospore Pollen Forecasts Species API](https://apis.io/apis/atmospore-pollen-forecasts/atmospore-pollen-forecasts-species-api/) — The Species API from Atmospore Pollen Forecasts — 1 operation(s) for species.
 
-## APIs
+### Published properties
 
-### Atmospore MCP Server
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Hosted Model Context Protocol server exposing the Atmospore pollen forecast capability as four agent tools (get_pollen, get_top_species, get_area_average, list_supported_species) plus an atmospore://help resource. JSON-RPC 2.0 over HTTP, authenticated with the same Atmospore API key as the REST API. An MIT-licensed local stdio equivalent is published at github.com/atmospore/atmospore-mcp.
+#### Arazzo workflows (2)
 
-- **Human URL:** [https://atmospore.com/article/mcp](https://atmospore.com/article/mcp)
-- **Base URL:** `https://mcp.atmospore.com/mcp`
+Multi-step workflows that chain operations into a business task.
 
-#### Tags
+- [Plan an allergy week for a location](https://apis.io/arazzos/atmospore-pollen-forecasts/atmospore-pollen-forecasts-allergy-week-plan/)
+- [Build a regional pollen risk board](https://apis.io/arazzos/atmospore-pollen-forecasts/atmospore-pollen-forecasts-regional-risk-board/)
 
-- mcp
-- agents
-- pollen
-- allergy
-- forecasting
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Tool Crosswalk](mcp/atmospore-pollen-forecasts-tool-crosswalk.yml)
-- [Source Code](https://github.com/atmospore/atmospore-mcp)
-- [Documentation](https://atmospore.com/article/mcp)
-- [Postman Collection](collections/atmospore-pollen-forecasts-pollen-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-pollen-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/atmospore-pollen-forecasts-pollen-area-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-pollen-area-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/atmospore-pollen-forecasts-pollen-top-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-pollen-top-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/atmospore-pollen-forecasts-species-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-species-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [atmospore](https://apis.io/servers/atmospore-pollen-forecasts/atmospore/)
 
-### Atmospore Pollen Forecasts Pollen API
+#### Agentic access (1)
 
-The Pollen API from Atmospore Pollen Forecasts — 1 operation(s) for pollen.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://atmospore.com/api-docs](https://atmospore.com/api-docs)
-- **Base URL:** `https://pollenapi.com`
+- [Atmospore Pollen Forecasts Agentic Access](https://apis.io/agentic-access/atmospore-pollen-forecasts/atmospore-pollen-forecasts-agentic-access/)
 
-#### Tags
+#### Examples (3)
 
-- Pollen
+Example requests and responses.
 
-#### Properties
+- [Atmospore Pollen Forecasts Pollen 401](https://apis.io/examples/atmospore-pollen-forecasts/atmospore-pollen-forecasts-pollen-401/)
+- [Atmospore Pollen Forecasts Pollen 403](https://apis.io/examples/atmospore-pollen-forecasts/atmospore-pollen-forecasts-pollen-403/)
+- [Atmospore Pollen Forecasts Species 200](https://apis.io/examples/atmospore-pollen-forecasts/atmospore-pollen-forecasts-species-200/)
 
-- [OpenAPI](openapi/atmospore-pollen-forecasts-pollen-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/atmospore-pollen-forecasts-pollen-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-pollen-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Documentation](https://atmospore.com/api-docs)
-- [API Reference](https://atmospore.com/api-docs)
-- [Developer Portal](https://atmospore.com/api-docs)
+#### Collections (4)
 
-### Atmospore Pollen Forecasts Pollen Area API
+Postman and Open Collection request collections.
 
-The Pollen Area API from Atmospore Pollen Forecasts — 1 operation(s) for pollen area.
+- [Atmospore Forecast Pollen API](https://apis.io/collections/atmospore-pollen-forecasts/open-atmospore-pollen-forecasts-pollen-api/)
+- [Atmospore Pollen Forecast Pollen Area API](https://apis.io/collections/atmospore-pollen-forecasts/open-atmospore-pollen-forecasts-pollen-area-api/)
+- [Atmospore Pollen Forecast Pollen Top API](https://apis.io/collections/atmospore-pollen-forecasts/open-atmospore-pollen-forecasts-pollen-top-api/)
+- [Atmospore Pollen Forecast Species API](https://apis.io/collections/atmospore-pollen-forecasts/open-atmospore-pollen-forecasts-species-api/)
 
-- **Human URL:** [https://atmospore.com/api-docs](https://atmospore.com/api-docs)
-- **Base URL:** `https://pollenapi.com`
+#### Overlays (1)
 
-#### Tags
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- Pollen Area
+- [Atmospore Pollen Forecasts Openapi Overlay](https://apis.io/overlays/atmospore-pollen-forecasts/atmospore-pollen-forecasts-openapi-overlay/)
 
-#### Properties
+#### Security (2)
 
-- [OpenAPI](openapi/atmospore-pollen-forecasts-pollen-area-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/atmospore-pollen-forecasts-pollen-area-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-pollen-area-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Documentation](https://atmospore.com/api-docs)
-- [API Reference](https://atmospore.com/api-docs)
-- [Developer Portal](https://atmospore.com/api-docs)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Atmospore Pollen Forecasts Pollen Top API
+- [Atmospore Pollen Forecasts Authentication](https://apis.io/security/atmospore-pollen-forecasts/atmospore-pollen-forecasts-authentication/)
+- [Atmospore Pollen Forecasts Domain Security](https://apis.io/security/atmospore-pollen-forecasts/atmospore-pollen-forecasts-domain-security/)
 
-The Pollen Top API from Atmospore Pollen Forecasts — 1 operation(s) for pollen top.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://atmospore.com/api-docs](https://atmospore.com/api-docs)
-- **Base URL:** `https://pollenapi.com`
+Published plans, tiers and prices.
 
-#### Tags
+- [Atmospore Pollen Forecasts Plans](https://apis.io/plans/atmospore-pollen-forecasts/atmospore-pollen-forecasts-plans/)
 
-- Pollen Top
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [OpenAPI](openapi/atmospore-pollen-forecasts-pollen-top-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/atmospore-pollen-forecasts-pollen-top-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-pollen-top-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Documentation](https://atmospore.com/api-docs)
-- [API Reference](https://atmospore.com/api-docs)
-- [Developer Portal](https://atmospore.com/api-docs)
+- [Atmospore Pollen Forecasts Rate Limits](https://apis.io/rate-limits/atmospore-pollen-forecasts/atmospore-pollen-forecasts-rate-limits/)
 
-### Atmospore Pollen Forecasts Species API
+## Where to find this API
 
-The Species API from Atmospore Pollen Forecasts — 1 operation(s) for species.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://atmospore.com/api-docs](https://atmospore.com/api-docs)
-- **Base URL:** `https://pollenapi.com`
-
-#### Tags
-
-- Species
-
-#### Properties
-
-- [OpenAPI](openapi/atmospore-pollen-forecasts-species-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/atmospore-pollen-forecasts-species-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/atmospore-pollen-forecasts-species-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Documentation](https://atmospore.com/api-docs)
-- [API Reference](https://atmospore.com/api-docs)
-- [Developer Portal](https://atmospore.com/api-docs)
-
-## Common Properties
-
-- [Issue Tracker](https://github.com/atmospore/atmospore-mcp/issues)
-- [License](https://github.com/atmospore/atmospore-mcp/blob/main/LICENSE)
 - [Website](https://atmospore.com/)
-- [Developer Portal](https://atmospore.com/api-docs)
 - [Documentation](https://atmospore.com/api-docs)
-- [API Reference](https://atmospore.com/api-docs)
-- [Support](https://atmospore.com/contact)
-- [GitHub Organization](https://github.com/atmospore)
+- [API reference](https://atmospore.com/api-docs)
 - [Pricing](https://atmospore.com/plans)
-- [Signup](https://atmospore.com/register)
-- [Login](https://atmospore.com/login)
-- [Terms of Service](https://atmospore.com/terms-of-service)
-- [Privacy Policy](https://atmospore.com/privacy-policy)
-- [Authentication](authentication/atmospore-pollen-forecasts-authentication.yml)
-- [Conventions](conventions/atmospore-pollen-forecasts-conventions.yml)
-- [Error Catalog](errors/atmospore-pollen-forecasts-problem-types.yml)
-- [Lifecycle](lifecycle/atmospore-pollen-forecasts-lifecycle.yml)
-- [Rate Limits](rate-limits/atmospore-pollen-forecasts-rate-limits.yml)
-- [Plans](plans/atmospore-pollen-forecasts-plans.yml)
-- [Packages](packages/atmospore-pollen-forecasts-packages.yml)
-- [S D Ks](packages/atmospore-pollen-forecasts-packages.yml)
-- [Sandbox](sandbox/atmospore-pollen-forecasts-sandbox.yml)
-- [Components](components/atmospore-pollen-forecasts-components.yml)
-- [Conformance](conformance/atmospore-pollen-forecasts-conformance.yml)
-- [Domain Security](security/atmospore-pollen-forecasts-domain-security.yml)
-- [M C P Server](mcp/atmospore-pollen-forecasts-mcp.yml)
-- [Overlay](overlays/atmospore-pollen-forecasts-openapi-overlay.yaml)
-- [Examples](examples/_index.yml)
-- [Data Model](data-model/atmospore-pollen-forecasts-data-model.yml)
-- [Agentic Access](agentic-access/atmospore-pollen-forecasts-agentic-access.yml)
-- [Agent Skill](skills/_index.yml)
-- [L L Ms Txt](llms/atmospore-pollen-forecasts-llms.txt)
-- [Arazzo](arazzo/atmospore-pollen-forecasts-allergy-week-plan.yml) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Arazzo](arazzo/atmospore-pollen-forecasts-regional-risk-board.yml) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
+- [Support](https://atmospore.com/contact)
+- [Blog](https://atmospore.com/blog/)
+- [Terms of service](https://atmospore.com/terms-of-service)
+- [Privacy policy](https://atmospore.com/privacy-policy)
+- [GitHub](https://github.com/atmospore)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Atmospore Pollen Forecasts
-**Email:** support@atmospore.com
-**URL:** https://atmospore.com/
+**Kin Score 54.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 52.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 61.3 |
+| Access clarity | 69.7 |
+
+**Agent readiness 36.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 31.3** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/atmospore-pollen-forecasts/](https://apis.io/providers/atmospore-pollen-forecasts/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Atmospore Pollen Forecasts: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/atmospore-pollen-forecasts/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
