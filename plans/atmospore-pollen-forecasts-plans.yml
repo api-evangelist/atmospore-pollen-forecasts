@@ -1,0 +1,106 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://atmospore.com/plans
+sources:
+- https://atmospore.com/plans
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T161713
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+published: true
+note: Four numeric monthly tiers plus a negotiated Custom tier; request quotas serve as limits.
+plan_count: 5
+currency: EUR
+plans:
+- name: Free
+  price_text: €0
+  price: 0
+  currency: EUR
+  period: month
+  unit: requests
+  included_quota: 3,000 requests/month (~100/day)
+- name: Starter
+  price_text: € 9 / mo
+  price: 9
+  currency: EUR
+  period: month
+  unit: requests
+  included_quota: 15,000 requests/month (~500/day)
+- name: Professional
+  price_text: € 39 / mo
+  price: 39
+  currency: EUR
+  period: month
+  unit: requests
+  included_quota: 150,000 requests/month (~5,000/day)
+- name: Enterprise
+  price_text: € 149 / mo
+  price: 149
+  currency: EUR
+  period: month
+  unit: requests
+  included_quota: 1,500,000 requests/month (~50,000/day)
+- name: Custom
+  price_text: Contact Sales
+  period: none
+  included_quota: API call limits, dedicated support, precision-tuned model access, CSV export
+rate_limit_statements:
+- 3,000 requests/month (~100/day)
+- 15,000 requests/month (~500/day)
+- 150,000 requests/month (~5,000/day)
+- 1,500,000 requests/month (~50,000/day)
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units:
+  - request
+  plans:
+  - name: Free
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Starter
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Professional
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Custom
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
